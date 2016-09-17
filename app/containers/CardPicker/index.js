@@ -33,7 +33,7 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
    * @returns boolean
    */
   isSelected(card) {
-    return this.state.pickedCard && this.state.pickedCard.value.value === card.value;
+    return this.state.pickedCard && this.state.pickedCard.value === card.value;
   }
 
   render() {
@@ -49,7 +49,7 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
             <Card
               key={index}
               card={card}
-              onClick={() => {}}
+              onClick={(pickedCard) => this.setState({ pickedCard })}
               isSelected={this.isSelected(card)}
             />
           ))}
