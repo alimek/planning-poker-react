@@ -1,0 +1,35 @@
+.card {
+  height: 8rem;
+  border: 1px solid #C8C8C8;
+  width: 6rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+  margin-right: 0.5rem;
+}
+
+.span {
+  align-self: center;
+  font-size: 3rem;
+  display: block;
+  user-select: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clicked {
+  background: rgb(255, 118, 38);
+  color: white;
+  border-color: transparent;
+}
+
+.clicked .span {
+  color: white;
+}
+
+.selectedLogo {
+  width: 5rem;
+}

@@ -1,0 +1,14 @@
+.newTaskForm {
+  align-self: flex-end;
+  background: white;
+  padding: 1rem;
+  border: 1px solid #CECECE;
+  border-radius: 1rem;
+}
+
+.header {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}

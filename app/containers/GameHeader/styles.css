@@ -1,0 +1,18 @@
+.gameHeader {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  height: 5rem;
+}
+
+.welcomeMessage {
+  flex: 0.8;
+  font-size: 2rem;
+  align-self: center;
+}
+
+.gameId {
+  flex: 0.2;
+  text-align: center;
+  align-self: center;
+}

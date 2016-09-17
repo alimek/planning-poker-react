@@ -1,0 +1,16 @@
+.centerContainer {
+  background: white;
+  padding: 2rem;
+  width: 50rem;
+  border-radius: 1rem;
+  border: 0.2rem solid #FF7626;
+  transition: transform 0.3s ease-out;
+}
+
+.centerContainer:hover:not(.hidden) {
+  transform: scale(1.05);
+}
+
+.centerContainer.hidden {
+  transform: scale(0);
+}

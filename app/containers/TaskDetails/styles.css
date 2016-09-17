@@ -1,0 +1,12 @@
+.taskDetails {
+  flex: 0.2;
+  border-left: 1px solid black;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.task {
+  flex: 1;
+}

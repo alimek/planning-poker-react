@@ -1,0 +1,31 @@
+.cardPicker {
+  height: 10rem;
+  width: 100%;
+  border-top: 1px solid black;
+  padding: 0.5rem 0 0 0.5rem;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.CardsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.Header {
+  color: $font-color;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+span {
+  font-size: 0.8rem;
+  color: grey;
+}
+
+.disabled {
+  display: none;
+}

@@ -1,0 +1,16 @@
+.gameContent {
+  background: rgba(255, 255, 255, 1);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.gameArea {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.left {
+  flex: 1;
+}

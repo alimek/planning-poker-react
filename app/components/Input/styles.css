@@ -1,0 +1,22 @@
+.input {
+  border: 1px solid #7F7F7F;
+  border-radius: 0.5rem;
+}
+
+input {
+  width: 100%;
+  height: 3rem;
+  outline: none;
+  padding: 0 0.5rem;
+  font-size: 1.5rem;
+}
+
+.inputError {
+  border-color: red;
+}
+
+.inputTransparent {
+  border: 0;
+  border-bottom: 1px solid white;
+  border-radius: 0;
+}

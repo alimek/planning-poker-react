@@ -1,9 +1,23 @@
-/**
- * styles.css
- *
- * App container styles
- */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 17px;
+}
 
-.container {
-  display: block;
+:global(#app) {
+  background-image: url(team.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+}
+
+.App {
+  display: flex;
+  flex: 1;
 }

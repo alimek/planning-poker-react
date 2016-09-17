@@ -1,0 +1,22 @@
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.user {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.userDetailsRight {
+  padding-left: 1rem;
+}

@@ -1,0 +1,22 @@
+.players {
+  flex: 0.8;
+  padding: 1rem;
+}
+
+.header {
+  color: grey;
+  font-size: 0.8rem;
+}
+
+.playerList {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.playerName {
+  text-align: center;
+  width: 90%;
+  display: block;
+  margin: 0.2rem 0;
+}

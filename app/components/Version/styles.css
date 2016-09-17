@@ -1,0 +1,6 @@
+.version {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+}

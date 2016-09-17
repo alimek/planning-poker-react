@@ -1,0 +1,21 @@
+
+.header {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: white;
+  font-size: 2.5rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.logo {
+  background: url('../../assets/img/pgssoftware-logo-white-150px.png');
+  width: 150px;
+  height: 100px;
+  display: inline-block;
+}
+
+.logoText {
+  align-self: center;
+}

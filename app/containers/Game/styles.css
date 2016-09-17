@@ -1,0 +1,6 @@
+.game {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  background: rgba(255, 118, 38, 0.95);
+}
