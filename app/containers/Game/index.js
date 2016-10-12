@@ -6,6 +6,7 @@ import { Loader } from '../../components';
 import GameSideMenu from '../GameSideMenu';
 import GameContext from '../GameContext';
 import { getGame } from '../../actions/GameActions';
+import { initSocketEvent } from '../../services/SocketService';
 
 class Game extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -21,12 +22,11 @@ class Game extends React.Component { // eslint-disable-line react/prefer-statele
   }
 
   componentWillMount() {
-    const gamePromise = getGame(this.props.params.id);
-    if (gamePromise) {
-      gamePromise.then(() => this.setState({ isInitialized: true }));
-    } else {
-      this.setState({ isInitialized: true });
-    }
+    getGame(this.props.params.id)
+      .then(() => {
+        this.setState({ isInitialized: true });
+        initSocketEvent();
+      });
   }
 
   render() {

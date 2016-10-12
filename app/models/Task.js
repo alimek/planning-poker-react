@@ -1,9 +1,11 @@
-import { observable } from 'mobx';
-
 class Task {
-  constructor() {
-    this.id = observable(null);
-    this.name = observable(null);
+  constructor(id, name) {
+    this.id = id;
+    this.name = name;
+  }
+
+  static fromCreatedTaskEvent({ id, name }) {
+    return new Task(id, name);
   }
 }
 

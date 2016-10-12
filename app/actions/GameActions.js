@@ -1,5 +1,6 @@
 import PokerAPI from '../services/PokerAPI';
 import AppStore from '../stores/AppStore';
+import { createServer } from '../actions/SocketActions';
 
 export const createGame = (name) => PokerAPI.post('/games', { name })
   .then((newGame) => {
@@ -8,7 +9,12 @@ export const createGame = (name) => PokerAPI.post('/games', { name })
   });
 
 export const getGame = (id) => PokerAPI.get(`/games/${id}`)
-  .then((game) => AppStore.game.fromResponse(game));
+  .then((game) => {
+    AppStore.game.fromResponse(game);
+    AppStore.io = createServer();
+
+    return game;
+  });
 
 export const startGame = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/start`)
   .then(() => AppStore.game.status.set('started'));
