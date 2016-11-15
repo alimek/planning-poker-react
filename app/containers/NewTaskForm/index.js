@@ -19,7 +19,9 @@ class NewTaskForm extends React.Component { // eslint-disable-line react/prefer-
     if (!this.isValid()) return;
 
     createTask(this.state.taskName)
-      .then(() => this.setState({ taskName: '' }));
+      .then(() => {
+        this.setState({ taskName: '' });
+      });
   }
 
   isNameValid() {

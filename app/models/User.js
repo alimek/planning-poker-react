@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-import { generateGUID, getRandomNumber, saveUserToStorage } from '../actions/UserActions';
+import { generateGUID, getRandomNumber, saveUserToStorage, logout } from '../actions/UserActions';
 
 class User {
   constructor() {
@@ -24,6 +24,10 @@ class User {
   restoreFromLocalStorage(userData) {
     this.id.set(userData.id);
     this.name.set(userData.name);
+  }
+
+  logout() {
+    logout();
   }
 }
 

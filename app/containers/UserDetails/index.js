@@ -1,10 +1,12 @@
 import React from 'react';
 import { observer } from 'mobx-react';
+import { browserHistory } from 'react-router';
 
 import styles from './styles.css';
 import avatarIMG from '../../assets/img/default-avatar.jpg';
 import { Avatar, Button, Input } from '../../components';
 import AppStore from '../../stores/AppStore';
+import { logout } from '../../actions/UserActions';
 
 class UserDetails extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -14,7 +16,9 @@ class UserDetails extends React.Component { // eslint-disable-line react/prefer-
   }
 
   logout() {
-    AppStore.game.logout();
+    AppStore.user.logout();
+    logout(AppStore.game.id.get());
+    browserHistory.push('/');
   }
 
   render() {

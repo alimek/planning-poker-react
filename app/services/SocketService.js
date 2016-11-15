@@ -1,5 +1,7 @@
 import AppStore from '../stores/AppStore';
 import { addTaskToList } from '../actions/TaskActions';
+import { gameStarted } from '../actions/GameActions';
+
 
 export const initSocketEvent = () => {
   AppStore.io.on('connect', () => {
@@ -8,6 +10,7 @@ export const initSocketEvent = () => {
       user: AppStore.user.serialize(),
     });
 
-    AppStore.io.on('game.task.created', addTaskToList);
+    AppStore.io.on('game.started', gameStarted);
+    AppStore.io.on('task.created', addTaskToList);
   });
 };

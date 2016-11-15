@@ -8,7 +8,7 @@ body {
 }
 
 :global(#app) {
-  background-image: url(team.jpg);
+  background-image: url('./team.jpg');
   background-attachment: fixed;
   background-size: cover;
   display: flex;
