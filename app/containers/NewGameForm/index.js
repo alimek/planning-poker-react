@@ -1,12 +1,16 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
 
 import { Button, Input } from '../../components';
 import { createGame } from '../../actions/GameActions';
 
-export default class NewGameForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  constructor() {
-    super();
+class NewGameForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  static propTypes = {
+    router: React.PropTypes.object.isRequired,
+  };
+
+  constructor(props) {
+    super(props);
     this.state = {
       name: null,
     };
@@ -26,7 +30,7 @@ export default class NewGameForm extends React.Component { // eslint-disable-lin
     if (!this.isValid()) return;
 
     createGame(this.state.name)
-      .then((newGame) => browserHistory.push(`/game/${newGame.id}`));
+      .then((newGame) => this.props.router.push(`/game/${newGame.id}`));
   }
 
   render() {
@@ -48,3 +52,5 @@ export default class NewGameForm extends React.Component { // eslint-disable-lin
     );
   }
 }
+
+export default withRouter(NewGameForm);

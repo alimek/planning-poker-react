@@ -1,5 +1,5 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
 
 import styles from './styles.css';
 import {
@@ -11,9 +11,9 @@ import {
 import { getGame } from '../../actions/GameActions';
 
 class JoinGame extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
   static propTypes = {
-    params: React.PropTypes.object.isRequired,
+    router: React.PropTypes.object.isRequired,
+    params: React.PropTypes.string.isRequired,
   };
 
   constructor(props) {
@@ -39,11 +39,11 @@ class JoinGame extends React.Component { // eslint-disable-line react/prefer-sta
   }
 
   onClickNo() {
-    browserHistory.replace('/');
+    this.props.router.push('/');
   }
 
   onClickYes() {
-    browserHistory.replace(`/game/${this.props.params.id}`);
+    this.props.router.push(`/game/${this.props.params.id}`);
   }
 
   render() {
@@ -74,4 +74,4 @@ class JoinGame extends React.Component { // eslint-disable-line react/prefer-sta
   }
 }
 
-export default JoinGame;
+export default withRouter(JoinGame);

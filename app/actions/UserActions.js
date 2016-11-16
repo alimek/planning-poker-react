@@ -17,8 +17,8 @@ export const saveUserToStorage = (user) => {
 
 export const logout = (game) => {
   PokerAPI.get(`/game/${game}/logout/${AppStore.user.id}/`).then(() => {
-    window.localStorage.user = null;
-    AppStore.user = null;
+    AppStore.prepareUser();
+    saveUserToStorage(AppStore.user);
   });
 };
 

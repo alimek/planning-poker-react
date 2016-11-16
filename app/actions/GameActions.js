@@ -23,5 +23,7 @@ export const gameStarted = () => {
   AppStore.game.status.set('started');
 };
 
-export const flip = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/flip`)
-  .then(() => {});
+// TODO:
+// export const flip = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/flip`)
+//   .then(() => {});
+

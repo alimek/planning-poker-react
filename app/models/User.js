@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-import { generateGUID, getRandomNumber, saveUserToStorage, logout } from '../actions/UserActions';
+import { generateGUID, getRandomNumber, saveUserToStorage } from '../actions/UserActions';
 
 class User {
   constructor() {
@@ -26,9 +26,6 @@ class User {
     this.name.set(userData.name);
   }
 
-  logout() {
-    logout();
-  }
 }
 
 export default User;
