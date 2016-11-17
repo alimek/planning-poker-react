@@ -5,6 +5,6 @@ import Task from '../models/Task';
 
 export const createTask = (name) => PokerAPI.post(`/games/${AppStore.game.id.get()}/tasks`, { name });
 
-export const addTaskToList = (message) => {
+export const onTaskCreated = (message) => {
   AppStore.game.tasks.push(Task.fromCreatedTaskEvent(message));
 };

@@ -15,10 +15,7 @@ export const saveUserToStorage = (user) => {
   window.localStorage.user = JSON.stringify(user.serialize());
 };
 
-export const logout = (game) => {
-  PokerAPI.get(`/game/${game}/logout/${AppStore.user.id}/`).then(() => {
-    AppStore.prepareUser();
-    saveUserToStorage(AppStore.user);
-  });
-};
-
+export const logout = () => PokerAPI.get(`/game/${AppStore.game.id.get()}/logout/${AppStore.user.id.get()}/`).then(() => {
+  AppStore.prepareUser();
+  saveUserToStorage(AppStore.user);
+});

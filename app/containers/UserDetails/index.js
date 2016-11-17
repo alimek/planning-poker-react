@@ -19,8 +19,7 @@ class UserDetails extends React.Component { // eslint-disable-line react/prefer-
   }
 
   logout() {
-    logout(AppStore.game.id.get());
-    this.props.router.push('/');
+    logout().then(() => this.props.router.push('/'));
   }
 
   render() {

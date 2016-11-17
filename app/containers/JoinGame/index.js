@@ -13,7 +13,7 @@ import { getGame } from '../../actions/GameActions';
 class JoinGame extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     router: React.PropTypes.object.isRequired,
-    params: React.PropTypes.string.isRequired,
+    params: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {

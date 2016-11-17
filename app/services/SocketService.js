@@ -1,5 +1,5 @@
 import AppStore from '../stores/AppStore';
-import { addTaskToList } from '../actions/TaskActions';
+import { onTaskCreated } from '../actions/TaskActions';
 import { gameStarted } from '../actions/GameActions';
 
 
@@ -11,6 +11,6 @@ export const initSocketEvent = () => {
     });
 
     AppStore.io.on('game.started', gameStarted);
-    AppStore.io.on('task.created', addTaskToList);
+    AppStore.io.on('task.created', onTaskCreated);
   });
 };
