@@ -1,3 +1,5 @@
+import PokerAPI from '../services/PokerAPI';
+import AppStore from '../stores/AppStore';
 
 const s4 = () => Math.floor((1 + Math.random()) * 0x10000)
   .toString(16)
@@ -9,5 +11,11 @@ export const getRandomNumber = (min, max) => Math.floor(Math.random() * ((((max 
 
 export const getStorageUser = () => (window.localStorage.user ? JSON.parse(window.localStorage.user) : null);
 
-export const saveUserToStorage = (user) => { window.localStorage.user = JSON.stringify(user.serialize()); };
+export const saveUserToStorage = (user) => {
+  window.localStorage.user = JSON.stringify(user.serialize());
+};
 
+export const logout = () => PokerAPI.get(`/game/${AppStore.game.id.get()}/logout/${AppStore.user.id.get()}/`).then(() => {
+  AppStore.prepareUser();
+  saveUserToStorage(AppStore.user);
+});

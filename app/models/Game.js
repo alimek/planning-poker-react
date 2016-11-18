@@ -15,10 +15,6 @@ class Game {
     this.status.set(data.status);
     this.tasks.replace(data.tasks);
   }
-
-  logout() {
-
-  }
 }
 
 export default Game;

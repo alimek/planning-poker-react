@@ -13,6 +13,10 @@ class AppStore {
   }
 
   init() {
+    this.prepareUser();
+  }
+
+  prepareUser() {
     const userData = getStorageUser();
     if (userData) {
       this.user.restoreFromLocalStorage(userData);

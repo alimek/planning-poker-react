@@ -1,20 +1,25 @@
 import React from 'react';
 import { observer } from 'mobx-react';
+import { withRouter } from 'react-router';
 
 import styles from './styles.css';
 import avatarIMG from '../../assets/img/default-avatar.jpg';
 import { Avatar, Button, Input } from '../../components';
 import AppStore from '../../stores/AppStore';
+import { logout } from '../../actions/UserActions';
 
 class UserDetails extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  static propTypes = {
+    router: React.PropTypes.object.isRequired,
+  };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.logout = this.logout.bind(this);
   }
 
   logout() {
-    AppStore.game.logout();
+    logout().then(() => this.props.router.push('/'));
   }
 
   render() {
@@ -45,4 +50,4 @@ class UserDetails extends React.Component { // eslint-disable-line react/prefer-
   }
 }
 
-export default observer(UserDetails);
+export default withRouter(observer(UserDetails));

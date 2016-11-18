@@ -25,6 +25,7 @@ class User {
     this.id.set(userData.id);
     this.name.set(userData.name);
   }
+
 }
 
 export default User;

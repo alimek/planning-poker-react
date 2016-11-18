@@ -18,3 +18,12 @@ export const getGame = (id) => PokerAPI.get(`/games/${id}`)
 
 export const startGame = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/start`)
   .then(() => AppStore.game.status.set('started'));
+
+export const gameStarted = () => {
+  AppStore.game.status.set('started');
+};
+
+// TODO:
+// export const flip = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/flip`)
+//   .then(() => {});
+
