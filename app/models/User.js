@@ -4,25 +4,26 @@ import { generateGUID, getRandomNumber, saveUserToStorage } from '../actions/Use
 
 class User {
   constructor() {
-    this.id = observable(null);
+    this.guid = observable(null);
     this.name = observable(null);
+    this.pickedCard = observable(null);
   }
 
   serialize() {
     return {
-      id: this.id.get(),
+      guid: this.guid.get(),
       name: this.name.get(),
     };
   }
 
   initializeNewUser() {
-    this.id.set(generateGUID());
+    this.guid.set(generateGUID());
     this.name.set(`Anonymous #${getRandomNumber(0, 1000)}`);
     saveUserToStorage(this);
   }
 
   restoreFromLocalStorage(userData) {
-    this.id.set(userData.id);
+    this.guid.set(userData.guid);
     this.name.set(userData.name);
   }
 

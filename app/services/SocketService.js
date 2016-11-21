@@ -1,6 +1,7 @@
 import AppStore from '../stores/AppStore';
 import { onTaskCreated } from '../actions/TaskActions';
 import { gameStarted } from '../actions/GameActions';
+import { onJoinedGame } from '../actions/UserActions';
 
 
 export const initSocketEvent = () => {
@@ -12,5 +13,6 @@ export const initSocketEvent = () => {
 
     AppStore.io.on('game.started', gameStarted);
     AppStore.io.on('task.created', onTaskCreated);
+    AppStore.io.on('player.joined', onJoinedGame);
   });
 };
