@@ -21,7 +21,7 @@ function Card({ onClick, card, isSelected, isClickable = true }) {
     <div className={style} onClick={() => onClick(card)}>
       <span className={styles.span}>
         {!isClickable && isSelected ? <img className={styles.selectedLogo} src={logo} alt="Logo" /> : null}
-        {card.value}
+        {card.value.get()}
       </span>
     </div>
   );

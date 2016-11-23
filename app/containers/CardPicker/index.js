@@ -29,11 +29,16 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
     };
   }
 
+  onCardClick(pickedCard) {
+    this.setState({ pickedCard });
+    AppStore.user.pickedCard.set(pickedCard);
+  }
+
   /**
    * @returns boolean
    */
   isSelected(card) {
-    return this.state.pickedCard && this.state.pickedCard.value === card.value;
+    return this.state.pickedCard && this.state.pickedCard.value.get() === card.value.get();
   }
 
   render() {
@@ -49,7 +54,7 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
             <Card
               key={index}
               card={card}
-              onClick={(pickedCard) => this.setState({ pickedCard })}
+              onClick={(pickedCard) => this.onCardClick(pickedCard)}
               isSelected={this.isSelected(card)}
             />
           ))}

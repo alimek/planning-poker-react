@@ -7,6 +7,7 @@ class User {
     this.guid = observable(null);
     this.name = observable(null);
     this.pickedCard = observable(null);
+    this.isReady = observable(false);
   }
 
   serialize() {

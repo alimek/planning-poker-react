@@ -19,11 +19,11 @@ class Players extends React.Component { // eslint-disable-line react/prefer-stat
             return (
               <div key={index}>
                 <Card
-                  isSelected={player.isReady}
+                  isSelected={player.isReady.get()}
                   card={card}
                   isClickable={false}
                 />
-                <span className={styles.playerName}>{player.name}</span>
+                <span className={styles.playerName}>{player.name.get()}</span>
               </div>
             );
           })}
