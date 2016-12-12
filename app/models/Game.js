@@ -1,5 +1,5 @@
 import { observable } from 'mobx';
-import UserFactory from '../factory/UserFactory';
+import User from '../models/User';
 
 class Game {
   constructor() {
@@ -16,7 +16,7 @@ class Game {
     this.status.set(data.status);
     this.tasks.replace(data.tasks);
     data.players.map((playerObj) => {
-      const player = UserFactory.createFromPlayerObj(playerObj);
+      const player = User.createFromPlayerObj(playerObj);
       this.addPlayer(player);
       return player;
     });

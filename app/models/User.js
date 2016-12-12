@@ -28,6 +28,21 @@ class User {
     this.name.set(userData.name);
   }
 
+  static createUserFromJoinedGameEvent(event) {
+    return User.createUser(event);
+  }
+
+  static createFromPlayerObj(playerObj) {
+    return User.createUser(playerObj);
+  }
+
+  static createUser(playerObj) {
+    const user = new User();
+    user.guid.set(playerObj.guid);
+    user.name.set(playerObj.name);
+    return user;
+  }
+
 }
 
 export default User;
