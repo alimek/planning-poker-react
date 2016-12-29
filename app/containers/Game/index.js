@@ -23,9 +23,10 @@ class Game extends React.Component { // eslint-disable-line react/prefer-statele
   }
 
   componentWillMount() {
+    const self = this;
     getGame(this.props.params.id)
       .then(() => {
-        this.setState({ isInitialized: true });
+        self.setState({ isInitialized: true });
         initSocketEvent();
       }).then(() => joinGame());
   }

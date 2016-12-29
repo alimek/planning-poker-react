@@ -29,3 +29,7 @@ span {
 .disabled {
   display: none;
 }
+
+.flipped {
+  opacity: 0.5;
+}

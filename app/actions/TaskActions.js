@@ -9,7 +9,14 @@ export const onTaskCreated = (message) => {
   AppStore.game.tasks.push(Task.fromCreatedTaskEvent(message));
 };
 
-export const cardClick = (pickedCard) => {
-  this.setState({ pickedCard });
-  AppStore.user.pickedCard.set(pickedCard);
+export const setActiveTask = (taskId) => {
+  PokerAPI.patch((`/games/${AppStore.game.id.get()}/tasks/${taskId}/active`));
 };
+
+export const onActiveTaskChange = (message) => {
+  AppStore.activeTask.set(AppStore.game.tasks.find((curVal) => curVal.id === message.id));
+  AppStore.activeTask.value.status = message.status;
+  AppStore.game.resetPlayersCards();
+  AppStore.game.setPickedCards(message.votes, AppStore.activeTask.value.status);
+};
+

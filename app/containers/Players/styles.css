@@ -20,3 +20,7 @@
   display: block;
   margin: 0.2rem 0;
 }
+
+.offline {
+  opacity: 0.4;
+}

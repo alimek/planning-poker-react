@@ -1,6 +1,6 @@
 import config from '../config';
 
-export default class PokeAPI {
+export default class PokerAPI {
   static get(url) {
     return fetch(config.restAPIURL + url, {
       method: 'get',

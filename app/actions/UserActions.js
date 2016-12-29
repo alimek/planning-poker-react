@@ -16,6 +16,15 @@ export const saveUserToStorage = (user) => {
   window.localStorage.user = JSON.stringify(user.serialize());
 };
 
+export const pickCard = (card) => {
+  AppStore.user.pickedCard.set(card);
+  PokerAPI.patch(`/games/${AppStore.game.id.get()}/players/${AppStore.user.guid.get()}/pick`, { taskId: AppStore.activeTask.value.id, vote: card.value });
+};
+
+export const onCardPick = (message) => {
+  AppStore.game.getPlayerByGUID(message.player).isReady.set(true);
+};
+
 export const apiSaveUser = (user) => PokerAPI.post('/players', user.serialize());
 
 export const joinGame = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/players/${AppStore.user.guid.get()}/add`);
@@ -23,6 +32,7 @@ export const joinGame = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/p
 export const onJoinedGame = (message) => {
   const user = User.createUserFromJoinedGameEvent(message);
   AppStore.game.addPlayer(user);
+  AppStore.game.activatePlayer(user);
 };
 
 export const logout = () => PokerAPI.get(`/game/${AppStore.game.id.get()}/logout/${AppStore.user.guid.get()}/`).then(() => {
@@ -30,3 +40,7 @@ export const logout = () => PokerAPI.get(`/game/${AppStore.game.id.get()}/logout
   saveUserToStorage(AppStore.user);
   AppStore.game = null;
 });
+
+export const onPlayerOffline = (message) => {
+  AppStore.game.greyoutPlayer(message.playerID);
+};

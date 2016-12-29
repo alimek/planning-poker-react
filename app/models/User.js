@@ -8,6 +8,7 @@ class User {
     this.name = observable(null);
     this.pickedCard = observable(null);
     this.isReady = observable(false);
+    this.offline = observable(false);
   }
 
   serialize() {
@@ -33,7 +34,9 @@ class User {
   }
 
   static createFromPlayerObj(playerObj) {
-    return User.createUser(playerObj);
+    const user = User.createUser(playerObj);
+    user.offline.set(playerObj.offline);
+    return user;
   }
 
   static createUser(playerObj) {

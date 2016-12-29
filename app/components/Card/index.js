@@ -15,12 +15,18 @@ function Card({ onClick, card, isSelected, isClickable = true }) {
     tmpArray.push(styles.clickable);
   }
 
+  const onClickFunction = () => {
+    if (onClick !== undefined) {
+      onClick(card);
+    }
+  };
+
   const style = classNames(tmpArray);
 
   return (
-    <div className={style} onClick={() => onClick(card)}>
+    <div className={style} onClick={onClickFunction}>
       <span className={styles.span}>
-        {!isClickable && isSelected ? <img className={styles.selectedLogo} src={logo} alt="Logo" /> : null}
+        {!isClickable && isSelected && card.value === null ? <img className={styles.selectedLogo} src={logo} alt="Logo" /> : null}
         {card.value}
       </span>
     </div>

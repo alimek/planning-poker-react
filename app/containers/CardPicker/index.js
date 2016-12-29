@@ -6,7 +6,7 @@ import styles from './styles.css';
 import { Card } from '../../components';
 import CardModel from '../../models/Card';
 import AppStore from '../../stores/AppStore';
-import { cardClick } from '../../actions/TaskActions';
+import { pickCard } from '../../actions/UserActions';
 
 const cards = [
   new CardModel('1/2'),
@@ -30,8 +30,11 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
     };
   }
 
-  onCardClick(pickedCard) {
-    cardClick(pickedCard);
+  onCardClick(card) {
+    if (AppStore.activeTask.value.status !== 'flipped') {
+      pickCard(card);
+      this.setState({ pickedCard: card });
+    }
   }
 
   /**
@@ -43,6 +46,10 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
 
   render() {
     const tmpArray = [styles.cardPicker];
+
+    if (AppStore.activeTask.activeTask !== undefined && AppStore.activeTask.value.status === 'flipped') {
+      tmpArray.push(styles.flipped);
+    }
 
     if (AppStore.game.status.get() !== 'started') return null;
 

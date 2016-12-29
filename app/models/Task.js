@@ -1,11 +1,13 @@
 class Task {
-  constructor(id, name) {
+  constructor(id, name, status) {
     this.id = id;
     this.name = name;
+    this.votes = [];
+    this.status = status;
   }
 
-  static fromCreatedTaskEvent({ id, name }) {
-    return new Task(id, name);
+  static fromCreatedTaskEvent({ id, name, status }) {
+    return new Task(id, name, status);
   }
 }
 

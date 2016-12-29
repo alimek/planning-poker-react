@@ -1,11 +1,13 @@
 import React from 'react';
+import { setActiveTask } from '../../actions/TaskActions';
+import { Button } from '../../components';
 
 import styles from './styles.css';
 
 function TaskListItem({ task }) {
   return (
     <li className={styles.taskListItem}>
-      {task.name}
+      <Button onClick={() => { setActiveTask(task.id); }} text={task.name} />
     </li>
   );
 }

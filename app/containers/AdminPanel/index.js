@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import styles from './styles.css';
 import { Button } from '../../components';
 import AppStore from '../../stores/AppStore';
-import { startGame } from '../../actions/GameActions';
+import { startGame, flip } from '../../actions/GameActions';
 
 class AdminPanel extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -23,7 +23,7 @@ class AdminPanel extends React.Component { // eslint-disable-line react/prefer-s
         <Button
           borderColor="grey"
           text="Flip"
-          onClick={() => {}}
+          onClick={flip}
           textColor="black"
           style={{ width: '7rem' }}
           backgroundColor="transparent"
