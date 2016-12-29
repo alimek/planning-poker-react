@@ -1,7 +1,7 @@
 import { observable } from 'mobx';
 
 import { Game, User } from '../models';
-import { getStorageUser } from '../actions/UserActions';
+import { getStorageUser, apiSaveUser } from '../actions/UserActions';
 
 class AppStore {
   constructor() {
@@ -22,6 +22,7 @@ class AppStore {
       this.user.restoreFromLocalStorage(userData);
     } else {
       this.user.initializeNewUser();
+      apiSaveUser(this.user);
     }
   }
 }

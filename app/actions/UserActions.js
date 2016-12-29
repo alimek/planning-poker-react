@@ -1,5 +1,6 @@
 import PokerAPI from '../services/PokerAPI';
 import AppStore from '../stores/AppStore';
+import User from '../models/User';
 
 const s4 = () => Math.floor((1 + Math.random()) * 0x10000)
   .toString(16)
@@ -15,7 +16,17 @@ export const saveUserToStorage = (user) => {
   window.localStorage.user = JSON.stringify(user.serialize());
 };
 
-export const logout = () => PokerAPI.get(`/game/${AppStore.game.id.get()}/logout/${AppStore.user.id.get()}/`).then(() => {
+export const apiSaveUser = (user) => PokerAPI.post('/players', user.serialize());
+
+export const joinGame = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/players/${AppStore.user.guid.get()}/add`);
+
+export const onJoinedGame = (message) => {
+  const user = User.createUserFromJoinedGameEvent(message);
+  AppStore.game.addPlayer(user);
+};
+
+export const logout = () => PokerAPI.get(`/game/${AppStore.game.id.get()}/logout/${AppStore.user.guid.get()}/`).then(() => {
   AppStore.prepareUser();
   saveUserToStorage(AppStore.user);
+  AppStore.game = null;
 });

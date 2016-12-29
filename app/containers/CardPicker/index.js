@@ -6,6 +6,7 @@ import styles from './styles.css';
 import { Card } from '../../components';
 import CardModel from '../../models/Card';
 import AppStore from '../../stores/AppStore';
+import { cardClick } from '../../actions/TaskActions';
 
 const cards = [
   new CardModel('1/2'),
@@ -29,6 +30,10 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
     };
   }
 
+  onCardClick(pickedCard) {
+    cardClick(pickedCard);
+  }
+
   /**
    * @returns boolean
    */
@@ -49,7 +54,7 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
             <Card
               key={index}
               card={card}
-              onClick={(pickedCard) => this.setState({ pickedCard })}
+              onClick={(pickedCard) => this.onCardClick(pickedCard)}
               isSelected={this.isSelected(card)}
             />
           ))}

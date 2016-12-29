@@ -6,6 +6,7 @@ import { Loader } from '../../components';
 import GameSideMenu from '../GameSideMenu';
 import GameContext from '../GameContext';
 import { getGame } from '../../actions/GameActions';
+import { joinGame } from '../../actions/UserActions';
 import { initSocketEvent } from '../../services/SocketService';
 
 class Game extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -26,7 +27,7 @@ class Game extends React.Component { // eslint-disable-line react/prefer-statele
       .then(() => {
         this.setState({ isInitialized: true });
         initSocketEvent();
-      });
+      }).then(() => joinGame());
   }
 
   render() {
