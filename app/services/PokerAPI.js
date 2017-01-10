@@ -3,7 +3,7 @@ import config from '../config';
 export default class PokerAPI {
   static get(url) {
     return fetch(config.restAPIURL + url, {
-      method: 'get',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -13,7 +13,7 @@ export default class PokerAPI {
 
   static post(url, data) {
     return fetch(config.restAPIURL + url, {
-      method: 'post',
+      method: 'POST',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export default class PokerAPI {
 
   static patch(url, data) {
     return fetch(config.restAPIURL + url, {
-      method: 'patch',
+      method: 'PATCH',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',

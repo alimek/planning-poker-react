@@ -80,7 +80,7 @@ process does not attempt to parse the global CSS.  If you do not do this
 there will be an error during the build process and you will not be able to
 run the application.
 
-Now edit `internals/config.js` and make the following modifications
+Now edit `internals/config.js.template` and make the following modifications
 ```javascript
 const ReactBoilerplate = {
   /* ... */
