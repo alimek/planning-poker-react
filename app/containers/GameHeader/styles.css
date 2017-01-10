@@ -16,3 +16,10 @@
   text-align: center;
   align-self: center;
 }
+
+
+.logout {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+}

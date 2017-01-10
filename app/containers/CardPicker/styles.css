@@ -16,12 +16,11 @@
 }
 
 .Header {
-  color: $font-color;
   margin-bottom: 0.5rem;
   display: block;
 }
 
-span {
+.span {
   font-size: 0.8rem;
   color: grey;
 }

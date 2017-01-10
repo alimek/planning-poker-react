@@ -55,7 +55,7 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
 
     return (
       <div className={classNames(tmpArray)}>
-        <span>Pick your card</span>
+        <span className={styles.span}>Pick your card</span>
         <div className={styles.CardsContainer}>
           {cards.map((card, index) => (
             <Card

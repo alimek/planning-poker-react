@@ -18,7 +18,10 @@ class Button extends React.Component {
     borderColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     backgroundColor: React.PropTypes.string,
-    style: React.PropTypes.object,
+    style: React.PropTypes.oneOfType([
+      React.PropTypes.object,
+      React.PropTypes.array,
+    ]),
     isDisabled: React.PropTypes.bool,
   };
 
@@ -31,11 +34,11 @@ class Button extends React.Component {
 
     const normalStyle = Object.assign({
       borderColor: this.props.borderColor,
-      color: this.props.textColor || 'white',
+      color: this.props.textColor || null,
       background: this.props.backgroundColor || null,
     }, this.props.style);
 
-    const style = classNames(tmpArray);
+    const style = classNames(tmpArray, this.props.style);
 
     return (
       <button

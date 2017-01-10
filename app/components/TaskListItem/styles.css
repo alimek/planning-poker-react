@@ -1,3 +1,36 @@
 .taskListItem {
+  display: flex;
+  flex-direction: row;
+  background: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
   color: white;
+}
+
+.taskListItem:active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+span {
+  color: white;
+  padding: 0 0.5rem;
+}
+
+.button {
+  font-size: 1.1rem;
+  line-height: 2.5rem;
+  text-align: left;
+  border-radius: 0;
+}
+
+.buttonActive {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.buttonFlipped {
+  text-decoration: line-through;
+}
+
+.number {
+  font-size: 1rem;
+  line-height: 2.5rem;
 }

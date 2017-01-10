@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './styles.css';
-import { Button, Input } from '../../components';
+import { Input } from '../../components';
 import { createTask } from '../../actions/TaskActions';
 
 class NewTaskForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -13,6 +13,13 @@ class NewTaskForm extends React.Component { // eslint-disable-line react/prefer-
     };
 
     this.addTask = this.addTask.bind(this);
+    this.onKeyPressed = this.onKeyPressed.bind(this);
+  }
+
+  onKeyPressed(event) {
+    if (event.keyCode === 13) {
+      this.addTask();
+    }
   }
 
   addTask() {
@@ -35,18 +42,15 @@ class NewTaskForm extends React.Component { // eslint-disable-line react/prefer-
   render() {
     return (
       <section className={styles.newTaskForm}>
-        <header className={styles.header}>Add new task</header>
         <Input
           value={this.state.taskName}
           name="newTaskName"
           isValid={this.isNameValid()}
           onChange={(event) => this.setState({ taskName: event.target.value })}
           placeholder="Enter task name"
-          style={{ marginBottom: '0.5rem' }}
-        />
-        <Button
-          text="Add new task"
-          onClick={this.addTask}
+          style={{ border: 0 }}
+          inputStyle={styles.input}
+          onKeyPressed={this.onKeyPressed}
         />
       </section>
     );

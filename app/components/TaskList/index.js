@@ -13,7 +13,7 @@ const TaskList = ({ tasks }) => {
     return (
       <ul className={styles.list}>
         {tasks.map((task, index) => (
-          <TaskListItem key={index} task={task} />
+          <TaskListItem key={index} task={task} number={index + 1} />
         ))}
       </ul>
     );

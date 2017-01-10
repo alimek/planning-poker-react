@@ -16,6 +16,7 @@ function Input({
   transparent,
   label,
   value,
+  onKeyPressed,
 }) {
   const realType = type || 'text';
 
@@ -31,8 +32,9 @@ function Input({
       <input
         type={realType}
         name={name}
-        style={inputStyle}
+        className={classNames(inputStyle)}
         value={value}
+        onKeyDown={onKeyPressed}
         onChange={onChange}
         placeholder={placeholder}
       />
@@ -43,14 +45,22 @@ function Input({
 Input.propTypes = {
   type: React.PropTypes.string,
   onChange: React.PropTypes.func.isRequired,
-  style: React.PropTypes.object,
+  style: React.PropTypes.oneOfType([
+    React.PropTypes.array,
+    React.PropTypes.object,
+  ]),
   placeholder: React.PropTypes.string,
   name: React.PropTypes.string.isRequired,
   isValid: React.PropTypes.bool,
   label: React.PropTypes.string,
   transparent: React.PropTypes.bool,
   value: React.PropTypes.string,
-  inputStyle: React.PropTypes.object,
+  onKeyPressed: React.PropTypes.func,
+  inputStyle: React.PropTypes.oneOfType([
+    React.PropTypes.array,
+    React.PropTypes.object,
+    React.PropTypes.string,
+  ]),
 };
 
 export default Input;

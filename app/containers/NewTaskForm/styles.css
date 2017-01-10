@@ -1,9 +1,6 @@
 .newTaskForm {
-  align-self: flex-end;
-  background: white;
-  padding: 1rem;
-  border: 1px solid #CECECE;
-  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.5rem;
 }
 
 .header {
@@ -11,4 +8,9 @@
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+}
+
+.input {
+  border: 0;
+  color: white;
 }
