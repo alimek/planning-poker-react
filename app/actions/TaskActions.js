@@ -18,5 +18,6 @@ export const onActiveTaskChange = (message) => {
   AppStore.activeTask.value.status = message.status;
   AppStore.game.resetPlayersCards();
   AppStore.game.setPickedCards(message.votes, AppStore.activeTask.value.status);
+  AppStore.user.pickedCard.set(null);
 };
 

@@ -16,7 +16,7 @@ function TaskListItem({ number, task }) {
     rowClasses.push(styles.buttonActive);
   }
 
-  if (currentTask && currentTask.status === 'flipped') {
+  if (currentTask && task.status === 'flipped') {
     buttonClasses.push(styles.buttonFlipped);
   }
 

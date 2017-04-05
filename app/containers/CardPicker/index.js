@@ -23,29 +23,16 @@ const cards = [
 
 class CardPicker extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  constructor() {
-    super();
-    this.state = {
-      pickedCard: null,
-    };
-  }
-
   onCardClick(card) {
     if (AppStore.activeTask.value.status !== 'flipped') {
       pickCard(card);
-      this.setState({ pickedCard: card });
     }
   }
 
-  /**
-   * @returns boolean
-   */
-  isSelected(card) {
-    return this.state.pickedCard && this.state.pickedCard.value === card.value;
-  }
 
   render() {
     const tmpArray = [styles.cardPicker];
+    const pickedCard = AppStore.user.pickedCard.get();
 
     if (AppStore.activeTask.activeTask !== undefined && AppStore.activeTask.value.status === 'flipped') {
       tmpArray.push(styles.flipped);
@@ -61,8 +48,8 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
             <Card
               key={index}
               card={card}
-              onClick={(pickedCard) => this.onCardClick(pickedCard)}
-              isSelected={this.isSelected(card)}
+              onClick={this.onCardClick}
+              isSelected={pickedCard && pickedCard.value === card.value}
             />
           ))}
         </div>
