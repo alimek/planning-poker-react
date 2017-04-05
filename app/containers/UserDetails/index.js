@@ -24,7 +24,7 @@ class UserDetails extends React.Component { // eslint-disable-line react/prefer-
             label="Your name"
             transparent
             value={AppStore.user.name.get() || ''}
-            onChange={(e, name) => AppStore.user.name.set(name)}
+            onChange={(e) => AppStore.user.name.set(e.target.value)}
           />
         </div>
       </div>

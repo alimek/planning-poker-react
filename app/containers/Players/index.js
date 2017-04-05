@@ -16,7 +16,7 @@ class Players extends React.Component { // eslint-disable-line react/prefer-stat
         <header className={styles.header}>Players</header>
         <div className={styles.playerList}>
           {players.map((player, index) => {
-            const tmpArray = [];
+            const tmpArray = [styles.container];
             if (player.offline.get()) {
               tmpArray.push(styles.offline);
             }

@@ -1,12 +1,11 @@
 .card {
-  height: 8rem;
+  height: 7rem;
   border: 1px solid #C8C8C8;
   width: 6rem;
   border-radius: 0.5rem;
   background: rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: center;
-  margin-right: 0.5rem;
 }
 
 .span {

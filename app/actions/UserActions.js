@@ -1,6 +1,7 @@
 import PokerAPI from '../services/PokerAPI';
 import AppStore from '../stores/AppStore';
 import User from '../models/User';
+import Game from '../models/Game';
 
 const s4 = () => Math.floor((1 + Math.random()) * 0x10000)
   .toString(16)
@@ -38,7 +39,7 @@ export const onJoinedGame = (message) => {
 export const logout = () => PokerAPI.get(`/game/${AppStore.game.id.get()}/logout/${AppStore.user.guid.get()}/`).then(() => {
   AppStore.prepareUser();
   saveUserToStorage(AppStore.user);
-  AppStore.game = null;
+  AppStore.game = new Game();
 });
 
 export const onPlayerOffline = (message) => {

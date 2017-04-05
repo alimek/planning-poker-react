@@ -19,8 +19,15 @@
   width: 90%;
   display: block;
   margin: 0.2rem 0;
+  color: black;
 }
 
 .offline {
   opacity: 0.4;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }

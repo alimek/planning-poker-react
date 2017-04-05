@@ -12,11 +12,11 @@ function TaskListItem({ number, task }) {
   const buttonClasses = [styles.button];
   const rowClasses = [styles.taskListItem];
 
-  if (currentTask.id === task.id) {
+  if (currentTask && currentTask.id === task.id) {
     rowClasses.push(styles.buttonActive);
   }
 
-  if (currentTask.status === 'flipped') {
+  if (currentTask && currentTask.status === 'flipped') {
     buttonClasses.push(styles.buttonFlipped);
   }
 
