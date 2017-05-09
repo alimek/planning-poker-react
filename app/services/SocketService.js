@@ -1,7 +1,7 @@
 import AppStore from '../stores/AppStore';
 import { onTaskCreated, onActiveTaskChange } from '../actions/TaskActions';
 import { onGameStarted, onFlip } from '../actions/GameActions';
-import { onJoinedGame, onPlayerOffline, onCardPick } from '../actions/UserActions';
+import { onJoinedGame, onPlayerOffline, onCardPick, onPlayerNameChanged } from '../actions/UserActions';
 
 
 export const initSocketEvent = () => {
@@ -18,5 +18,6 @@ export const initSocketEvent = () => {
     AppStore.io.on('player.cardpicked', onCardPick);
     AppStore.io.on('task.active', onActiveTaskChange);
     AppStore.io.on('task.flip', onFlip);
+    AppStore.io.on('player.nameChanged', onPlayerNameChanged);
   });
 };

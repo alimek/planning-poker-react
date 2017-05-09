@@ -1,3 +1,6 @@
+import { debounce, find } from 'lodash';
+import { action } from 'mobx';
+
 import PokerAPI from '../services/PokerAPI';
 import AppStore from '../stores/AppStore';
 import User from '../models/User';
@@ -45,3 +48,18 @@ export const logout = () => PokerAPI.get(`/game/${AppStore.game.id.get()}/logout
 export const onPlayerOffline = (message) => {
   AppStore.game.greyoutPlayer(message.playerID);
 };
+
+export const patchPlayerName = debounce(
+  name => PokerAPI.patch(`/players/${AppStore.user.guid.get()}`, { name }),
+  500
+);
+
+export const onLoggedPlayerNameChanged = name => {
+  AppStore.user.name.set(name);
+  patchPlayerName(name);
+};
+
+export const onPlayerNameChanged = action(player => {
+  const gamePlayer = find(AppStore.game.players, { guid: player.guid });
+  gamePlayer.name = player.name;
+});

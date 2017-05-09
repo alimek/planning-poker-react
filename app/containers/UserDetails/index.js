@@ -6,6 +6,7 @@ import styles from './styles.css';
 import avatarIMG from '../../assets/img/default-avatar.jpg';
 import { Avatar, Input } from '../../components';
 import AppStore from '../../stores/AppStore';
+import { onLoggedPlayerNameChanged } from '../../actions/UserActions';
 
 class UserDetails extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -24,7 +25,7 @@ class UserDetails extends React.Component { // eslint-disable-line react/prefer-
             label="Your name"
             transparent
             value={AppStore.user.name.get() || ''}
-            onChange={(e) => AppStore.user.name.set(e.target.value)}
+            onChange={(e) => onLoggedPlayerNameChanged(e.target.value)}
           />
         </div>
       </div>
