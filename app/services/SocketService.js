@@ -3,7 +3,6 @@ import { onTaskCreated, onActiveTaskChange } from '../actions/TaskActions';
 import { onGameStarted, onFlip } from '../actions/GameActions';
 import { onJoinedGame, onPlayerOffline, onCardPick, onPlayerNameChanged } from '../actions/UserActions';
 
-
 export const initSocketEvent = () => {
   AppStore.io.on('connect', () => {
     AppStore.io.emit('join', {

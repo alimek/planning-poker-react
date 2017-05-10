@@ -16,6 +16,8 @@ class NewGameForm extends React.Component { // eslint-disable-line react/prefer-
     };
 
     this.createNewGame = this.createNewGame.bind(this);
+    this.validateName = this.validateName.bind(this);
+    this.isValid = this.isValid.bind(this);
   }
 
   validateName() {

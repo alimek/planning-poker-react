@@ -1,4 +1,4 @@
-import io from 'socket.io-client';
+import io from 'socket.io-client/dist/socket.io';
 
 import config from '../config';
 
