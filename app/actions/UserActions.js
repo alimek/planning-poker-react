@@ -1,6 +1,7 @@
 import { debounce, find } from 'lodash';
 import { action } from 'mobx';
 
+import store from '../stores/store';
 import PokerAPI from '../services/PokerAPI';
 import AppStore from '../stores/AppStore';
 import User from '../models/User';
@@ -21,8 +22,14 @@ export const saveUserToStorage = (user) => {
 };
 
 export const pickCard = (card) => {
+  const activeTask = store.getState().activeTask;
+
+  if (activeTask && activeTask.status === 'flipped') {
+    return;
+  }
+
   AppStore.user.pickedCard.set(card);
-  PokerAPI.patch(`/games/${AppStore.game.id.get()}/players/${AppStore.user.guid.get()}/pick`, { taskId: AppStore.activeTask.value.id, vote: card.value });
+  PokerAPI.patch(`/games/${AppStore.game.id.get()}/players/${AppStore.user.guid.get()}/pick`, { taskId: activeTask.id, vote: card.value });
 };
 
 export const onCardPick = (message) => {

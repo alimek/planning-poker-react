@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 
 import styles from './styles.css';
 import { Card } from '../../components';
@@ -21,19 +22,16 @@ const cards = [
 ];
 
 class CardPicker extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
-  onCardClick(card) {
-    if (AppStore.activeTask.value.status !== 'flipped') {
-      pickCard(card);
-    }
-  }
-
+  static propTypes = {
+    activeTask: React.PropTypes.object,
+  };
 
   render() {
+    const { activeTask } = this.props;
     const tmpArray = [styles.cardPicker];
     const pickedCard = AppStore.user.pickedCard.get();
 
-    if (AppStore.activeTask.activeTask !== undefined && AppStore.activeTask.value.status === 'flipped') {
+    if (activeTask && activeTask.status === 'flipped') {
       tmpArray.push(styles.flipped);
     }
 
@@ -47,7 +45,7 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
             <Card
               key={index}
               card={card}
-              onClick={this.onCardClick}
+              onClick={() => pickCard(card)}
               isSelected={pickedCard && pickedCard.value === card.value}
             />
           ))}
@@ -57,4 +55,8 @@ class CardPicker extends React.Component { // eslint-disable-line react/prefer-s
   }
 }
 
-export default observer(CardPicker);
+export default observer(connect(
+  store => ({
+    activeTask: store.activeTask,
+  }),
+)(CardPicker));

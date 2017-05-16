@@ -6,6 +6,7 @@
  */
 import 'babel-polyfill';
 import 'font-awesome/css/font-awesome.css';
+import { Provider } from 'react-redux';
 
 /* eslint-disable import/no-unresolved */
 // Load the manifest.json file and the .htaccess file
@@ -34,20 +35,23 @@ const rootRoute = {
   childRoutes: createRoutes(),
 };
 
+import store from './stores/store';
 
 const render = (translatedMessages) => {
   ReactDOM.render(
-    <LanguageProvider locale="en" messages={translatedMessages}>
-      <Router
-        history={browserHistory}
-        routes={rootRoute}
-        render={
-          // Scroll to top when going to a new page, imitating default browser
-          // behaviour
-          applyRouterMiddleware(useScroll())
-        }
-      />
-    </LanguageProvider>,
+    <Provider store={store}>
+      <LanguageProvider locale="en" messages={translatedMessages}>
+        <Router
+          history={browserHistory}
+          routes={rootRoute}
+          render={
+            // Scroll to top when going to a new page, imitating default browser
+            // behaviour
+            applyRouterMiddleware(useScroll())
+          }
+        />
+      </LanguageProvider>
+    </Provider>,
     document.getElementById('app')
   );
 };
@@ -71,9 +75,3 @@ if (!window.Intl) {
 } else {
   render(translationMessages);
 }
-
-// Install ServiceWorker and AppCache in the end since
-// it's not most important operation and if main code fails,
-// we do not want it installed
-import { install } from 'offline-plugin/runtime';
-install();
