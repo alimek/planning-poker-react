@@ -8,14 +8,18 @@ import {
   CLEAR_PICKED_CARD,
 } from './types';
 
-export const createTask = (name) => PokerAPI.post(`/games/${AppStore.game.id.get()}/tasks`, { name });
+export const createTask = (name) => {
+  const game = store.getState().game;
+  return PokerAPI.post(`/games/${game.id}/tasks`, { name });
+};
 
 export const onTaskCreated = (message) => {
   AppStore.game.tasks.push(Task.fromCreatedTaskEvent(message));
 };
 
 export const setActiveTask = (taskId) => {
-  PokerAPI.patch((`/games/${AppStore.game.id.get()}/tasks/${taskId}/active`));
+  const game = store.getState().game;
+  PokerAPI.patch((`/games/${game.id}/tasks/${taskId}/active`));
 };
 
 export const onActiveTaskChange = (message) => {
@@ -28,4 +32,3 @@ export const onActiveTaskChange = (message) => {
   AppStore.game.setPickedCards(message.votes, task.status);
   store.dispatch({ type: CLEAR_PICKED_CARD });
 };
-

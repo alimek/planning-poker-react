@@ -1,20 +1,15 @@
 import {
-  GAME_RETRIEVED,
   GAME_CREATED,
+  GAME_RETRIEVED,
 } from '../actions/types';
 
-const initialState = {
-  isLoaded: false,
-};
+const initialState = null;
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case GAME_RETRIEVED:
     case GAME_CREATED:
-      return {
-        ...state,
-        isLoaded: true,
-      };
+    case GAME_RETRIEVED:
+      return action.game;
     default:
       return state;
   }

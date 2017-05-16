@@ -10,11 +10,6 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-span {
-  color: white;
-  padding: 0 0.5rem;
-}
-
 .button {
   font-size: 1.1rem;
   line-height: 2.5rem;
@@ -31,6 +26,7 @@ span {
 }
 
 .number {
-  font-size: 1rem;
+  padding: 0 0.5rem;
+  font-size: 1.1rem;
   line-height: 2.5rem;
 }

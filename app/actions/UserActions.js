@@ -42,7 +42,11 @@ export const onCardPick = (message) => {
 
 export const apiSaveUser = (user) => PokerAPI.post('/players', user.serialize());
 
-export const joinGame = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/players/${AppStore.user.guid.get()}/add`);
+export const joinGame = () => () => {
+  const game = store.getState().game;
+
+  PokerAPI.patch(`/games/${game.id}/players/${AppStore.user.guid.get()}/add`);
+};
 
 export const onJoinedGame = (message) => {
   const user = User.createUserFromJoinedGameEvent(message);

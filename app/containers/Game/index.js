@@ -1,5 +1,6 @@
 import React from 'react';
-import { observer } from 'mobx-react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import styles from './styles.css';
 import { Loader } from '../../components';
@@ -10,29 +11,30 @@ import { joinGame } from '../../actions/UserActions';
 import { initSocketEvent } from '../../services/SocketService';
 
 class Game extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
   static propTypes = {
-    params: React.PropTypes.object.isRequired,
+    params: React.PropTypes.shape({
+      is: React.PropTypes.string,
+    }).isRequired,
+    isLoaded: React.PropTypes.bool.isRequired,
+    actions: React.PropTypes.shape({
+      joinGame: React.PropTypes.func.isRequired,
+    }).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isInitialized: false,
-    };
-  }
-
   componentWillMount() {
-    const self = this;
-    getGame(this.props.params.id)
+    const { params, actions } = this.props;
+
+    getGame(params.id)
       .then(() => {
-        self.setState({ isInitialized: true });
         initSocketEvent();
-      }).then(() => joinGame());
+        actions.joinGame();
+      });
   }
 
   render() {
-    if (!this.state.isInitialized) return <Loader />;
+    const { isLoaded } = this.props;
+
+    if (!isLoaded) return <Loader />;
 
     return (
       <div className={styles.game}>
@@ -43,4 +45,11 @@ class Game extends React.Component { // eslint-disable-line react/prefer-statele
   }
 }
 
-export default observer(Game);
+export default connect(
+  store => ({
+    isLoaded: store.app.isLoaded,
+  }),
+  dispatch => ({
+    actions: bindActionCreators({ joinGame }, dispatch),
+  }),
+)(Game);

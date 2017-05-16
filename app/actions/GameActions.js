@@ -6,18 +6,19 @@ import { createServer } from '../actions/SocketActions';
 import {
   SET_ACTIVE_TASK,
   SET_ACTIVE_TASK_STATUS,
+  GAME_CREATED,
+  GAME_RETRIEVED,
 } from './types';
 
 export const createGame = name => PokerAPI.post('/games', { name })
-  .then((newGame) => {
-    AppStore.game.fromResponse(newGame);
-
-    return newGame;
+  .then((game) => {
+    store.dispatch({ type: GAME_CREATED, game });
+    return game;
   });
 
 export const getGame = id => PokerAPI.get(`/games/${id}`)
   .then((game) => {
-    AppStore.game.fromResponse(game);
+    store.dispatch({ type: GAME_RETRIEVED, game });
     AppStore.io = createServer();
 
     if (AppStore.game.tasks.length > 0) {
@@ -37,7 +38,10 @@ export const getGame = id => PokerAPI.get(`/games/${id}`)
     return game;
   });
 
-export const startGame = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/start`);
+export const startGame = () => {
+  const game = store.getState().game;
+  return PokerAPI.patch(`/games/${game.id}/start`);
+};
 
 export const onGameStarted = () => {
   AppStore.game.status.set('started');

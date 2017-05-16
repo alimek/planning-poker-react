@@ -27,7 +27,7 @@ const TaskList = ({ tasks }) => {
 };
 
 TaskList.propTypes = {
-  tasks: React.PropTypes.object.isRequired,
+  tasks: React.PropTypes.array.isRequired,
 };
 
 export default observer(TaskList);

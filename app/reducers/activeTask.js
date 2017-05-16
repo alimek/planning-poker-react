@@ -1,6 +1,7 @@
 import {
   SET_ACTIVE_TASK,
   SET_ACTIVE_TASK_STATUS,
+  GAME_RETRIEVED,
 } from '../actions/types';
 
 const initialState = null;
@@ -14,6 +15,8 @@ export default (state = initialState, action = {}) => {
         ...state,
         status: action.status,
       };
+    case GAME_RETRIEVED:
+      return action.game.tasks.length > 0 ? action.game.tasks[0] : state;
     default:
       return state;
   }

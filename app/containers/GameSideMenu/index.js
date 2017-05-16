@@ -1,14 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styles from './styles.css';
-import { observer } from 'mobx-react';
 
 import { Version, TaskList } from '../../components';
 import UserDetails from '../UserDetails';
-import AppStore from '../../stores/AppStore';
 import NewTaskForm from '../NewTaskForm';
 
 
-const GameSideMenu = () => (
+const GameSideMenu = ({ tasks }) => (
   <div className={styles.gameSideMenu}>
     <UserDetails />
     <div className={styles.borderTop}>
@@ -18,10 +17,18 @@ const GameSideMenu = () => (
       <div className={styles.title}>Task list:</div>
     </div>
     <div className={styles.scrollable}>
-      <TaskList tasks={AppStore.game.tasks} />
+      <TaskList tasks={tasks} />
     </div>
     <Version />
   </div>
 );
 
-export default observer(GameSideMenu);
+GameSideMenu.propTypes = {
+  tasks: React.PropTypes.array.isRequired,
+};
+
+export default connect(
+  store => ({
+    tasks: store.game.tasks,
+  }),
+)(GameSideMenu);
