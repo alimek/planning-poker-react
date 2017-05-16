@@ -32,7 +32,7 @@ class GameContent extends React.Component { // eslint-disable-line react/prefer-
               )
           }
         </div>
-        <CardPicker />
+        {AppStore.game.status.get() === 'started' ? <CardPicker /> : null}
       </div>
     );
   }

@@ -1,12 +1,10 @@
 import React from 'react';
-import { observer } from 'mobx-react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import styles from './styles.css';
 import { Card } from '../../components';
 import CardModel from '../../models/Card';
-import AppStore from '../../stores/AppStore';
 import { pickCard } from '../../actions/UserActions';
 
 const cards = [
@@ -21,42 +19,38 @@ const cards = [
   new CardModel('?'),
 ];
 
-class CardPicker extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  static propTypes = {
-    activeTask: React.PropTypes.object,
-  };
+const CardPicker = ({ activeTask, pickedCard }) => { // eslint-disable-line react/prefer-stateless-function
+  const tmpArray = [styles.cardPicker];
 
-  render() {
-    const { activeTask } = this.props;
-    const tmpArray = [styles.cardPicker];
-    const pickedCard = AppStore.user.pickedCard.get();
-
-    if (activeTask && activeTask.status === 'flipped') {
-      tmpArray.push(styles.flipped);
-    }
-
-    if (AppStore.game.status.get() !== 'started') return null;
-
-    return (
-      <div className={classNames(tmpArray)}>
-        <span className={styles.span}>Pick your card</span>
-        <div className={styles.CardsContainer}>
-          {cards.map((card, index) => (
-            <Card
-              key={index}
-              card={card}
-              onClick={() => pickCard(card)}
-              isSelected={pickedCard && pickedCard.value === card.value}
-            />
-          ))}
-        </div>
-      </div>
-    );
+  if (activeTask && activeTask.status === 'flipped') {
+    tmpArray.push(styles.flipped);
   }
-}
 
-export default observer(connect(
+  return (
+    <div className={classNames(tmpArray)}>
+      <span className={styles.span}>Pick your card</span>
+      <div className={styles.CardsContainer}>
+        {cards.map((card, index) => (
+          <Card
+            key={index}
+            card={card}
+            onClick={pickCard}
+            isSelected={pickedCard && pickedCard.value === card.value}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+CardPicker.propTypes = {
+  activeTask: React.PropTypes.object,
+  pickedCard: React.PropTypes.object,
+};
+
+export default connect(
   store => ({
     activeTask: store.activeTask,
+    pickedCard: store.pickedCard,
   }),
-)(CardPicker));
+)(CardPicker);

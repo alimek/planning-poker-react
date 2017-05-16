@@ -5,6 +5,7 @@ import Task from '../models/Task';
 
 import {
   SET_ACTIVE_TASK,
+  CLEAR_PICKED_CARD,
 } from './types';
 
 export const createTask = (name) => PokerAPI.post(`/games/${AppStore.game.id.get()}/tasks`, { name });
@@ -25,6 +26,6 @@ export const onActiveTaskChange = (message) => {
 
   AppStore.game.resetPlayersCards();
   AppStore.game.setPickedCards(message.votes, task.status);
-  AppStore.user.pickedCard.set(null);
+  store.dispatch({ type: CLEAR_PICKED_CARD });
 };
 

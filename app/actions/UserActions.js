@@ -7,6 +7,10 @@ import AppStore from '../stores/AppStore';
 import User from '../models/User';
 import Game from '../models/Game';
 
+import {
+  SET_PICKED_CARD,
+} from './types';
+
 const s4 = () => Math.floor((1 + Math.random()) * 0x10000)
   .toString(16)
   .substring(1);
@@ -28,7 +32,7 @@ export const pickCard = (card) => {
     return;
   }
 
-  AppStore.user.pickedCard.set(card);
+  store.dispatch({ type: SET_PICKED_CARD, card });
   PokerAPI.patch(`/games/${AppStore.game.id.get()}/players/${AppStore.user.guid.get()}/pick`, { taskId: activeTask.id, vote: card.value });
 };
 
