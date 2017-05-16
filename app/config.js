@@ -1,6 +1,6 @@
 export default {
   version: '1.0',
-  restAPIURL: 'http://symfony.dev:8088/app_dev.php',
+  restAPIURL: 'https://poker.pgs-soft.com/api',
   env: process.env.NODE_ENV || 'development',
-  socketURL: 'http://localhost:8090',
+  socketURL: 'https://poker-api.pgs-soft.com',
 };

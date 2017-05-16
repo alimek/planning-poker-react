@@ -5,6 +5,7 @@
  * code.
  */
 import 'babel-polyfill';
+import 'font-awesome/css/font-awesome.css';
 
 /* eslint-disable import/no-unresolved */
 // Load the manifest.json file and the .htaccess file

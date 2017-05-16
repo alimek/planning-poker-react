@@ -9,7 +9,6 @@ import AppStore from '../../stores/AppStore';
 import { pickCard } from '../../actions/UserActions';
 
 const cards = [
-  new CardModel('1/2'),
   new CardModel('0'),
   new CardModel('1'),
   new CardModel('2'),
