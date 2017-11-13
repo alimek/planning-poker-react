@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import styles from './styles.css';
 
@@ -9,8 +10,20 @@ class App extends React.Component {
     children: PropTypes.node,
   };
 
-  componentDidMount() {
+  constructor(props) {
+    super(props);
 
+    const { history, game } = this.props;
+
+    let url = null;
+
+    if (game) {
+      url = `/game/${game.id}`;
+    } else {
+      url = '/login';
+    }
+
+    history.push(url);
   }
 
   render() {
@@ -24,6 +37,6 @@ class App extends React.Component {
 
 export default connect(
   store => ({
-
+    game: store.game,
   }),
-)(App);
+)(withRouter(App));
