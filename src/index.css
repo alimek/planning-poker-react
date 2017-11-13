@@ -1,0 +1,13 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-size: 17px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+#app {
+    height: 100%;
+    display: flex;
+    flex: 1;
+}
