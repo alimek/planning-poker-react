@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import styles from './styles.css';
 import { Button } from '../../components';
 import AppStore from '../../stores/AppStore';
-import { startGame, flip } from '../../actions/GameActions';
+import { startGame, flip } from '../../actions/game';
 
 class AdminPanel extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {

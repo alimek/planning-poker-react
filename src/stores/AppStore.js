@@ -1,5 +1,5 @@
 import { Game, User } from '../models';
-import { getStorageUser, apiSaveUser } from '../actions/UserActions';
+import { getStorageUser, apiSaveUser } from '../actions/user';
 
 class AppStore {
   constructor() {

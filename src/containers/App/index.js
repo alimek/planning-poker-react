@@ -1,19 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import styles from './styles.css';
 
-export default class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
+class App extends React.Component {
   static propTypes = {
     children: PropTypes.node,
   };
 
+  componentDidMount() {
+
+  }
+
   render() {
     return (
       <div className={styles.App}>
-        {React.Children.toArray(this.props.children)}
+        {this.props.children}
       </div>
     );
   }
 }
+
+export default connect(
+  store => ({
+
+  }),
+)(App);

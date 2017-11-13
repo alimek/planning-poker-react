@@ -5,11 +5,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Button, Input } from '../../components';
-import { createGame } from '../../actions/GameActions';
+import { createGame } from '../../actions/game';
 
 class NewGameForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
-    router: PropTypes.object.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func,
+    }).isRequired,
   };
 
   constructor(props) {
@@ -61,7 +63,7 @@ class NewGameForm extends React.Component { // eslint-disable-line react/prefer-
 }
 
 export default connect(
-  store => null,
+  store => ({}),
   dispatch => ({
     actions: bindActionCreators({ createGame }, dispatch),
   })

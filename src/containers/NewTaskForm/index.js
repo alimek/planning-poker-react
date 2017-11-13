@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './styles.css';
 import { Input } from '../../components';
-import { createTask } from '../../actions/TaskActions';
+import { createTask } from '../../actions/task';
 
 class NewTaskForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

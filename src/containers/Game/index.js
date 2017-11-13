@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { observer } from 'mobx-react';
-
 import styles from './styles.css';
 import { Loader } from '../../components';
 import GameSideMenu from '../GameSideMenu';
 import GameContext from '../GameContext';
-import { getGame } from '../../actions/GameActions';
-import { joinGame } from '../../actions/UserActions';
+import { getGame } from '../../actions/game';
+import { joinGame } from '../../actions/user';
 import { initSocketEvent } from '../../services/SocketService';
 
 class Game extends React.Component { // eslint-disable-line react/prefer-stateless-function

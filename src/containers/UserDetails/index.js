@@ -8,7 +8,7 @@ import styles from './styles.css';
 import avatarIMG from '../../assets/img/default-avatar.jpg';
 import { Avatar, Input } from '../../components';
 import AppStore from '../../stores/AppStore';
-import { onLoggedPlayerNameChanged } from '../../actions/UserActions';
+import { onLoggedPlayerNameChanged } from '../../actions/user';
 
 class UserDetails extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {

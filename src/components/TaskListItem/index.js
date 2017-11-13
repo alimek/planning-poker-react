@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { observer } from 'mobx-react';
-import { setActiveTask } from '../../actions/TaskActions';
+import { setActiveTask } from '../../actions/task';
 
 import styles from './styles.css';
 

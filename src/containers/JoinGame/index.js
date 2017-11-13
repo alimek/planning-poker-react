@@ -8,7 +8,7 @@ import {
   Loader,
   Button,
 } from '../../components';
-import { getGame } from '../../actions/GameActions';
+import { getGame } from '../../actions/game';
 
 class JoinGame extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {

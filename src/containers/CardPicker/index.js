@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import styles from './styles.css';
 import { Card } from '../../components';
 import CardModel from '../../models/Card';
-import { pickCard } from '../../actions/UserActions';
+import { pickCard } from '../../actions/user';
 
 const cards = [
   new CardModel('0'),

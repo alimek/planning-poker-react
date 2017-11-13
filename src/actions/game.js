@@ -1,7 +1,7 @@
 import store from '../stores/store';
 import PokerAPI from '../services/PokerAPI';
 import AppStore from '../stores/AppStore';
-import { createServer } from '../actions/SocketActions';
+import { createServer } from '../actions/socket';
 
 import {
   SET_ACTIVE_TASK,

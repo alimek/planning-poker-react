@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-import { generateGUID, getRandomNumber, saveUserToStorage } from '../actions/UserActions';
+import { generateGUID, getRandomNumber, saveUserToStorage } from '../actions/user';
 
 class User {
   constructor() {

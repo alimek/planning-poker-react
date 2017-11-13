@@ -7,7 +7,7 @@ import { withRouter } from 'react-router';
 import styles from './styles.css';
 import AppStore from '../../stores/AppStore';
 import { Button } from '../../components';
-import { logout } from '../../actions/UserActions';
+import { logout } from '../../actions/user';
 
 const { game } = AppStore;
 
