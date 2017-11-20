@@ -1,5 +1,4 @@
 import React from 'react';
-import { observer } from 'mobx-react';
 
 import styles from './styles.css';
 import GameHeader from '../GameHeader';
@@ -16,4 +15,4 @@ class GameContext extends React.Component { // eslint-disable-line react/prefer-
   }
 }
 
-export default observer(GameContext);
+export default GameContext;
