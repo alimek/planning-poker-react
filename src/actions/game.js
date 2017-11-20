@@ -1,5 +1,5 @@
 import store from '../stores/store';
-import PokerAPI from '../services/PokerAPI';
+import PokerAPI from '../services/poker-api';
 // import { createServer } from '../actions/socket';
 
 import {

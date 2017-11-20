@@ -1,5 +1,5 @@
 import store from '../stores/store';
-import PokerAPI from '../services/PokerAPI';
+import PokerAPI from '../services/poker-api';
 import Task from '../models/Task';
 
 import {
