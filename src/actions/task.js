@@ -6,9 +6,22 @@ import Task from '../models/Task';
 import {
   SET_ACTIVE_TASK,
   CLEAR_PICKED_CARD,
+  TASK_CREATED,
 } from './types';
 
-export const createTask = (name) => PokerAPI.post(`/games/${AppStore.game.id.get()}/tasks`, { name });
+export const createTask = name => async (dispatch) => {
+  const { game } = store.getState();
+  try {
+    const response = await PokerAPI.post(`/games/${game.id}/tasks`, { name });
+    const { data } = response;
+
+    dispatch({ type: TASK_CREATED, task: data });
+    return data;
+
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 export const onTaskCreated = (message) => {
   AppStore.game.tasks.push(Task.fromCreatedTaskEvent(message));

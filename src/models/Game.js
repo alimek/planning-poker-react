@@ -14,12 +14,12 @@ class Game {
     this.id.set(data.id);
     this.name.set(data.name);
     this.status.set(data.status);
-    this.tasks.replace(data.tasks);
-    data.players.map((playerObj) => {
-      const player = User.createFromPlayerObj(playerObj);
-      this.addPlayer(player);
-      return player;
-    });
+    // this.tasks.replace(data.tasks);
+    // data.players.map((playerObj) => {
+    //   const player = User.createFromPlayerObj(playerObj);
+    //   this.addPlayer(player);
+    //   return player;
+    // });
   }
 
   resetPlayersCards() {

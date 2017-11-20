@@ -7,33 +7,23 @@ import { Loader } from '../../components';
 import GameSideMenu from '../GameSideMenu';
 import GameContext from '../GameContext';
 import { getGame } from '../../actions/game';
-import { joinGame } from '../../actions/user';
-import { initSocketEvent } from '../../services/SocketService';
 
 class Game extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static propTypes = {
-    params: PropTypes.object.isRequired,
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      isInitialized: false,
-    };
-  }
-
   componentWillMount() {
-    const self = this;
-    getGame(this.props.params.id)
-      .then(() => {
-        self.setState({ isInitialized: true });
-        initSocketEvent();
-      }).then(() => joinGame());
+    const { game } = this.props;
+    getGame(game.id);
+      // .then(() => {
+      //   self.setState({ isInitialized: true });
+      //   initSocketEvent();
+      // }).then(() => joinGame());
   }
 
   render() {
-    if (!this.state.isInitialized) return <Loader />;
+    const { game } = this.props;
+    const { isLoaded } = game;
+
+    if (!isLoaded) return <Loader />;
 
     return (
       <div className={styles.game}>
@@ -46,6 +36,6 @@ class Game extends React.Component { // eslint-disable-line react/prefer-statele
 
 export default connect(
   store => ({
-    params: store.game,
+    game: store.game,
   }),
 )(Game);

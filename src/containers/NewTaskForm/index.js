@@ -1,35 +1,31 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import styles from './styles.css';
 import { Input } from '../../components';
 import { createTask } from '../../actions/task';
 
-class NewTaskForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class NewTaskForm extends React.Component {
+  state = {
+    taskName: '',
+  };
 
-  constructor() {
-    super();
-    this.state = {
-      taskName: '',
-    };
-
-    this.addTask = this.addTask.bind(this);
-    this.onKeyPressed = this.onKeyPressed.bind(this);
-  }
-
-  onKeyPressed(event) {
+  onKeyPressed = (event) => {
     if (event.keyCode === 13) {
       this.addTask();
     }
-  }
+  };
 
-  addTask() {
+  addTask = () => {
     if (!this.isValid()) return;
 
-    createTask(this.state.taskName)
+    this.props.actions
+      .createTask(this.state.taskName)
       .then(() => {
         this.setState({ taskName: '' });
       });
-  }
+  };
 
   isNameValid() {
     return this.state.taskName === '' || this.state.taskName.length > 0;
@@ -57,4 +53,9 @@ class NewTaskForm extends React.Component { // eslint-disable-line react/prefer-
   }
 }
 
-export default NewTaskForm;
+export default connect(
+  store => null,
+  dispatch => ({
+    actions: bindActionCreators({ createTask }, dispatch),
+  }),
+)(NewTaskForm);

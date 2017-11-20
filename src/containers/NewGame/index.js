@@ -15,7 +15,7 @@ class NewGame extends React.Component {
 
     const { history, game } = this.props;
 
-    if (game) {
+    if (game.isLoaded) {
       history.push(`/game/${game.id}`);
     }
   }
