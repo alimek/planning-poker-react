@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import styles from './styles.css';
 
-function Label({ name, text, small }) {
+const Label = ({ name, text, small }) => {
   const arrayStyles = [];
 
   if (small) arrayStyles.push(styles.small);
@@ -18,12 +18,16 @@ function Label({ name, text, small }) {
       {text}
     </label>
   );
-}
+};
 
 Label.propTypes = {
   name: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   small: PropTypes.bool,
+};
+
+Label.defaultProps = {
+  small: false,
 };
 
 export default Label;

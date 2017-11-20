@@ -7,7 +7,12 @@ import styles from './styles.css';
 
 const logo = require('../../assets/img/pgssoftware-logo-white-150px.png');
 
-function Card({ onClick, card, isSelected, isClickable = true }) {
+const Card = ({
+  onClick,
+  card,
+  isSelected,
+  isClickable = true,
+}) => {
   const tmpArray = [styles.card];
   if (isSelected) {
     tmpArray.push(styles.clicked);
@@ -33,7 +38,7 @@ function Card({ onClick, card, isSelected, isClickable = true }) {
       </span>
     </div>
   );
-}
+};
 
 Card.propTypes = {
   card: PropTypes.object.isRequired,

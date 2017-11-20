@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
-function Avatar({ src }) {
-  return (
-    <img className={styles.avatar} src={src} alt="Avatar" />
-  );
-}
+const Avatar = ({ src }) => <img className={styles.avatar} src={src} alt="Avatar" />;
 
 Avatar.propTypes = {
   src: PropTypes.string.isRequired,

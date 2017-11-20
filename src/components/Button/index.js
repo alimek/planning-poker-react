@@ -1,9 +1,3 @@
-/**
- *
- * Button
- *
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -11,9 +5,7 @@ import classNames from 'classnames';
 
 import styles from './styles.css';
 
-/* eslint-disable react/prefer-stateless-function */
 class Button extends React.Component {
-
   static propTypes = {
     text: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
@@ -25,6 +17,14 @@ class Button extends React.Component {
       PropTypes.array,
     ]),
     isDisabled: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    borderColor: null,
+    textColor: null,
+    backgroundColor: null,
+    isDisabled: false,
+    style: undefined,
   };
 
   render() {

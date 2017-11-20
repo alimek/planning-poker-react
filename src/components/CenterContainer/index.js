@@ -10,7 +10,11 @@ const Center = ({ children }) => (
 );
 
 Center.propTypes = {
-  children: PropTypes.array.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.array,
+  ]).isRequired,
 };
 
 export default Center;

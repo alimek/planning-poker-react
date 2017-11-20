@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/es/storage';
 
-import reducers from '../reducers';
+import reducers from './reducers/index';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
