@@ -1,7 +1,14 @@
-import { GAME_CREATED, GAME_LOADED, TASK_CREATED } from '../actions/types';
+import {
+  GAME_CREATED, GAME_LOADED, GAME_STARTED, SET_ACTIVE_TASK, TASK_CREATED,
+  USER_LOGGED_OUT
+} from '../actions/types';
+import { STATUS_FLIPPED } from './activeTask';
+
+export const STATUS_STARTED = 'started';
 
 const initialState = {
   isLoaded: false,
+  canPickCard: false,
 };
 
 export default (state = initialState, action = {}) => {
@@ -20,14 +27,26 @@ export default (state = initialState, action = {}) => {
         isLoaded: true,
       };
     case TASK_CREATED:
-      debugger;
       return {
         ...state,
         tasks: [
           ...state.tasks,
-          ...action.task,
+          action.task,
         ],
       };
+    case GAME_STARTED:
+      return {
+        ...state,
+        status: STATUS_STARTED,
+        canPickCard: true,
+      };
+    case SET_ACTIVE_TASK:
+      return {
+        ...state,
+        canPickCard: action.task.status !== STATUS_FLIPPED,
+      };
+    case USER_LOGGED_OUT:
+      return initialState;
     default:
       return state;
   }

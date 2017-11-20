@@ -1,9 +1,11 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/es/storage';
 
 import reducers from '../reducers';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const config = {
   key: 'root',
@@ -12,7 +14,8 @@ const config = {
     'user',
     'game',
     'app',
-  ]
+    'activeTask',
+  ],
 };
 
 const reducer = persistCombineReducers(config, reducers);
@@ -20,7 +23,7 @@ const reducer = persistCombineReducers(config, reducers);
 const store = createStore(
   reducer,
   undefined,
-  applyMiddleware(thunk),
+  composeEnhancers(applyMiddleware(thunk)),
 );
 
 export const persistor = persistStore(store);

@@ -1,15 +1,15 @@
 import React from 'react';
 import classNames from 'classnames';
-import { observer } from 'mobx-react';
+import { connect } from 'react-redux';
 
 import styles from './styles.css';
 import { Card } from '../../components';
-import AppStore from '../../stores/AppStore';
-import CardModel from '../../models/Card';
+import CardModel from '../../models/card';
 
 class Players extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const players = AppStore.game.players;
+    const { game } = this.props;
+    const { players } = game;
 
     return (
       <div className={styles.players}>
@@ -42,4 +42,6 @@ class Players extends React.Component { // eslint-disable-line react/prefer-stat
   }
 }
 
-export default observer(Players);
+export default connect(store => ({
+  game: store.game,
+}))(Players);

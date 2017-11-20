@@ -1,5 +1,4 @@
 import { observable } from 'mobx';
-import User from '../models/User';
 
 class Game {
   constructor() {

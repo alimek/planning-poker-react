@@ -1,4 +1,3 @@
-import AppStore from '../stores/AppStore';
 import { onTaskCreated, onActiveTaskChange } from '../actions/task';
 import { onGameStarted, onFlip } from '../actions/game';
 import { onJoinedGame, onPlayerOffline, onCardPick, onPlayerNameChanged } from '../actions/user';

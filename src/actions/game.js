@@ -1,13 +1,18 @@
 import store from '../stores/store';
 import PokerAPI from '../services/PokerAPI';
-import AppStore from '../stores/AppStore';
-import { createServer } from '../actions/socket';
+// import { createServer } from '../actions/socket';
 
 import {
   SET_ACTIVE_TASK,
   SET_ACTIVE_TASK_STATUS,
-  GAME_CREATED, GAME_LOADED,
+  GAME_CREATED,
+  GAME_LOADED,
+  GAME_STARTED,
+  TASK_FLIPPED,
+  GAME_FINISHED,
 } from './types';
+import { setActiveTask } from './task';
+import { getNextTask } from '../utils/task';
 
 export const createGame = name => async (dispatch) => {
   const newGame = await PokerAPI.post('/games', { name });
@@ -21,8 +26,8 @@ export const getGame = id => async (dispatch) => {
   const gameResponse = await PokerAPI.get(`/games/${id}`);
   const game = gameResponse.data;
 
-    // AppStore.game.fromResponse(game);
-    // AppStore.io = createServer();
+  // AppStore.game.fromResponse(game);
+  // AppStore.io = createServer();
 
   dispatch({ type: GAME_LOADED, game });
 
@@ -44,26 +49,47 @@ export const getGame = id => async (dispatch) => {
   //   }
   //   return game;
   // });
-}
-
-export const startGame = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/start`);
-
-export const onGameStarted = () => {
-  AppStore.game.status.set('started');
-  store.dispatch({ type: SET_ACTIVE_TASK, task: AppStore.game.tasks[0] });
-  AppStore.game.resetPlayersCards();
 };
 
-export const flip = () => {
-  const activeTask = store.getState().activeTask;
+export const startGame = () => async (dispatch) => {
+  const { game } = store.getState();
+  try {
+    await PokerAPI.patch(`/games/${game.id}/start`);
+    dispatch({ type: GAME_STARTED });
+    dispatch(setActiveTask(game.tasks[0]));
+  } catch (e) {
+    throw new Error('Error while starting game', e);
+  }
+};
 
-  PokerAPI.patch(`/games/${AppStore.game.id.get()}/tasks/${activeTask.id}/flip`);
+export const onGameStarted = () => {
+  const { game } = store.getState();
+
+  store.dispatch({ type: SET_ACTIVE_TASK, task: game.tasks[0] });
+  // AppStore.game.resetPlayersCards();
+};
+
+export const flip = () => async (dispatch) => {
+  const { game, activeTask } = store.getState();
+  await PokerAPI.patch(`/games/${game.id}/tasks/${activeTask.id}/flip`);
+
+  try {
+    const nextTask = getNextTask(game, activeTask);
+
+    dispatch({
+      type: TASK_FLIPPED,
+      task: activeTask,
+      nextTask,
+    });
+  } catch (e) {
+    dispatch({ type: GAME_FINISHED, game, task: activeTask });
+  }
 };
 
 export const onFlip = (message) => {
-  const activeTask = store.getState().activeTask;
+  // const { activeTask } = store.getState();
 
   store.dispatch({ type: SET_ACTIVE_TASK_STATUS, status: message.status });
-  AppStore.game.resetPlayersCards();
-  AppStore.game.setPickedCards(message.votes, activeTask.status);
+  // AppStore.game.resetPlayersCards();
+  // AppStore.game.setPickedCards(message.votes, activeTask.status);
 };

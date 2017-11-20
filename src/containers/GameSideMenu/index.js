@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './styles.css';
 import { connect } from 'react-redux';
 
+import styles from './styles.css';
 import { Version, TaskList } from '../../components';
 import UserDetails from '../UserDetails';
 import NewTaskForm from '../NewTaskForm';
@@ -11,8 +11,8 @@ import NewTaskForm from '../NewTaskForm';
 class GameSideMenu extends React.PureComponent {
   static propTypes = {
     game: PropTypes.shape({
-      tasks: PropTypes.arrayOf(PropTypes.shape())
-    }),
+      tasks: PropTypes.arrayOf(PropTypes.shape()),
+    }).isRequired,
   };
 
   render() {
@@ -35,8 +35,6 @@ class GameSideMenu extends React.PureComponent {
   }
 }
 
-export default connect(
-  store => ({
-    game: store.game,
-  }),
-)(GameSideMenu);
+export default connect(store => ({
+  game: store.game,
+}))(GameSideMenu);

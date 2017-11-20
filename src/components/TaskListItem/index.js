@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { bindActionCreators } from 'redux';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { observer } from 'mobx-react';
 import { setActiveTask } from '../../actions/task';
 
 import styles from './styles.css';
 
-function TaskListItem({ number, task, currentTask }) {
+function TaskListItem({ number, task, currentTask, actions }) {
   const buttonClasses = [styles.button];
   const rowClasses = [styles.taskListItem];
 
@@ -16,12 +15,12 @@ function TaskListItem({ number, task, currentTask }) {
     rowClasses.push(styles.buttonActive);
   }
 
-  if (currentTask && task.status === 'flipped') {
+  if (task.status === 'flipped') {
     buttonClasses.push(styles.buttonFlipped);
   }
 
   return (
-    <li className={classNames(rowClasses)} onClick={() => { setActiveTask(task.id); }}>
+    <li className={classNames(rowClasses)} onClick={() => actions.setActiveTask(task)}>
       <span className={styles.number}>{number}.</span>
       <span className={classNames(buttonClasses)}>{task.name}</span>
     </li>
@@ -32,10 +31,16 @@ TaskListItem.propTypes = {
   task: PropTypes.object.isRequired,
   number: PropTypes.number.isRequired,
   currentTask: PropTypes.object,
+  actions: PropTypes.shape({
+    setActiveTask: PropTypes.func,
+  }).isRequired,
 };
 
-export default observer(connect(
+export default connect(
   store => ({
     currentTask: store.activeTask,
   }),
-)(TaskListItem));
+  dispatch => ({
+    actions: bindActionCreators({ setActiveTask }, dispatch),
+  }),
+)(TaskListItem);

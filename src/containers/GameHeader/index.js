@@ -1,38 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { observer } from 'mobx-react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { bindActionCreators } from 'redux';
 
 import styles from './styles.css';
-import AppStore from '../../stores/AppStore';
 import { Button } from '../../components';
 import { logout } from '../../actions/user';
 
-const { game } = AppStore;
 
+class GameHeader extends React.Component {
+  static propTypes = {
+    history: PropTypes.shape().isRequired,
+    game: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }).isRequired,
+    actions: PropTypes.shape({
+      logout: PropTypes.func.isRequired,
+    }).isRequired,
+  };
 
-const GameHeader = ({ router }) => (
-  <div className={styles.gameHeader}>
-    <div className={styles.welcomeMessage}>
-      Welcome to game #{game.name.get()}
-    </div>
-    <div className={styles.gameId}>
-      [ID: {game.id.get()}]
-    </div>
-    <div className={styles.logout}>
-      <Button
-        textColor="white"
-        text="Logout"
-        borderColor="white"
-        onClick={() => logout().then(() => router.push('/'))}
-      />
-    </div>
-  </div>
-);
+  render() {
+    const { history, game, actions } = this.props;
 
-GameHeader.propTypes = {
-  router: PropTypes.object.isRequired,
-};
+    return (
+      <div className={styles.gameHeader}>
+        <div className={styles.welcomeMessage}>
+          Welcome to game #{game.name}
+        </div>
+        <div className={styles.gameId}>
+          [ID: {game.id}]
+        </div>
+        <div className={styles.logout}>
+          <Button
+            textColor="white"
+            text="Logout"
+            borderColor="white"
+            onClick={() => actions.logout().then(() => history.push('/'))}
+          />
+        </div>
+      </div>
+    );
+  }
+}
 
-export default observer(withRouter(GameHeader));
+export default connect(
+  store => ({
+    game: store.game,
+  }),
+  dispatch => ({
+    actions: bindActionCreators({ logout }, dispatch),
+  }),
+)(withRouter(GameHeader));

@@ -1,76 +1,68 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import styles from './styles.css';
 import { Button } from '../../components';
-import AppStore from '../../stores/AppStore';
 import { startGame, flip } from '../../actions/game';
+import { STATUS_STARTED } from '../../reducers/game';
 
 class AdminPanel extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     activeTask: PropTypes.object,
+    game: PropTypes.shape({
+      tasks: PropTypes.arrayOf(PropTypes.shape()),
+      status: PropTypes.string,
+    }).isRequired,
+    actions: PropTypes.shape({
+      flip: PropTypes.func,
+      startGame: PropTypes.func,
+    }).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.getButtons = this.getButtons.bind(this);
-  }
-
-  getButtons() {
-    const gameStatus = AppStore.game.status.get();
-    const { activeTask } = this.props;
-
-    if (AppStore.game.tasks.length > 0) {
-      if (gameStatus === 'new') {
-        return this.getNewGameButtons();
-      } else if (gameStatus === 'started' && activeTask.status === 'new') {
-        return this.getStartedGameButtons();
-      }
-    }
-
-    return null;
-  }
-
-  getNewGameButtons() {
-    return (
-      <Button
-        borderColor="grey"
-        text="Start Game"
-        textColor="black"
-        onClick={startGame}
-        style={{ width: '7rem', marginRight: '1rem' }}
-        backgroundColor="transparent"
-      />
-    );
-  }
-
-  getStartedGameButtons() {
-    return (
-      <Button
-        borderColor="grey"
-        text="Flip"
-        onClick={flip}
-        textColor="black"
-        style={{ width: '7rem' }}
-        backgroundColor="transparent"
-      />
-    );
-  }
+  static defaultProps = {
+    activeTask: null,
+  };
 
   render() {
+    const { activeTask, game, actions } = this.props;
+    const { status } = game;
+
+    if (game.tasks.length === 0) return null;
+
     return (
       <div className={styles.adminPanel}>
-        {this.getButtons()}
+        {
+          activeTask && activeTask.status === 'new' && status === STATUS_STARTED ?
+            <Button
+              borderColor="grey"
+              text="Flip"
+              onClick={actions.flip}
+              textColor="black"
+              style={{ width: '7rem' }}
+              backgroundColor="transparent"
+            /> :
+            <Button
+              borderColor="grey"
+              text="Start Game"
+              textColor="black"
+              onClick={actions.startGame}
+              style={{ width: '7rem', marginRight: '1rem' }}
+              backgroundColor="transparent"
+            />
+        }
       </div>
     );
   }
 }
 
-export default observer(connect(
+export default connect(
   store => ({
     activeTask: store.activeTask,
+    game: store.game,
   }),
-)(AdminPanel));
+  dispatch => ({
+    actions: bindActionCreators({ startGame, flip}, dispatch),
+  }),
+)(AdminPanel);

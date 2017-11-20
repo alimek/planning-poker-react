@@ -2,15 +2,17 @@ import 'babel-polyfill';
 import 'font-awesome/css/font-awesome.css';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
+import 'sanitize.css/sanitize.css';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App, LanguageProvider, PageWrapper, NewGame, Game } from './containers';
-import { BrowserRouter, Route } from 'react-router-dom';
-
-import 'sanitize.css/sanitize.css';
+import { App, LanguageProvider, PageWrapper } from './containers';
+import {
+  Game,
+  NewGame,
+} from './pages';
 import { translationMessages } from './i18n';
-
 import store, { persistor } from './stores/store';
 
 ReactDOM.render(
@@ -27,5 +29,5 @@ ReactDOM.render(
       </LanguageProvider>
     </PersistGate>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('app'),
 );

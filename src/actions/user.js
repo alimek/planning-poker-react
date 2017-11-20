@@ -1,14 +1,11 @@
-import { debounce, find } from 'lodash';
+import { find } from 'lodash';
 import { action } from 'mobx';
 
 import store from '../stores/store';
 import PokerAPI from '../services/PokerAPI';
-import AppStore from '../stores/AppStore';
-import User from '../models/User';
-import Game from '../models/Game';
 
 import {
-  SET_PICKED_CARD,
+  SET_PICKED_CARD, USER_LOGGED_OUT, USER_NAME_CHANGED,
 } from './types';
 
 const s4 = () => Math.floor((1 + Math.random()) * 0x10000)
@@ -26,51 +23,61 @@ export const saveUserToStorage = (user) => {
 };
 
 export const pickCard = (card) => {
-  const activeTask = store.getState().activeTask;
+  const { activeTask, game, user } = store.getState();
 
   if (activeTask && activeTask.status === 'flipped') {
     return;
   }
 
   store.dispatch({ type: SET_PICKED_CARD, card });
-  PokerAPI.patch(`/games/${AppStore.game.id.get()}/players/${AppStore.user.guid.get()}/pick`, { taskId: activeTask.id, vote: card.value });
+  PokerAPI.patch(`/games/${game.id}/players/${user.guid}/pick`, { taskId: activeTask.id, vote: card.value });
 };
 
 export const onCardPick = (message) => {
-  AppStore.game.getPlayerByGUID(message.player).isReady.set(true);
+  const { game } = store.getState();
+  game.getPlayerByGUID(message.player).isReady.set(true);
 };
 
-export const apiSaveUser = (user) => PokerAPI.post('/players', user.serialize());
+export const apiSaveUser = user => PokerAPI.post('/players', user.serialize());
 
-export const joinGame = () => PokerAPI.patch(`/games/${AppStore.game.id.get()}/players/${AppStore.user.guid.get()}/add`);
+export const joinGame = () => {
+  const { game, user } = store.getState();
+  return PokerAPI.patch(`/games/${game.id.get()}/players/${user.guid.get()}/add`);
+};
 
 export const onJoinedGame = (message) => {
-  const user = User.createUserFromJoinedGameEvent(message);
-  AppStore.game.addPlayer(user);
-  AppStore.game.activatePlayer(user);
+  // const { game } = store.getState();
+
+  // const user = User.createUserFromJoinedGameEvent(message);
+  // game.addPlayer(user);
+  // game.activatePlayer(user);
 };
 
-export const logout = () => PokerAPI.get(`/game/${AppStore.game.id.get()}/logout/${AppStore.user.guid.get()}/`).then(() => {
-  AppStore.prepareUser();
-  saveUserToStorage(AppStore.user);
-  AppStore.game = new Game();
-});
+export const logout = () => async (dispatch) => {
+  // const { game, user } = store.getState();
+  // await PokerAPI.get(`/game/${game.id}/logout/${user.guid}`);
+
+  dispatch({ type: USER_LOGGED_OUT });
+  return true;
+};
 
 export const onPlayerOffline = (message) => {
-  AppStore.game.greyoutPlayer(message.playerID);
+  // game.greyoutPlayer(message.playerID);
 };
 
-export const patchPlayerName = debounce(
-  name => PokerAPI.patch(`/players/${AppStore.user.guid.get()}`, { name }),
-  500
-);
+export const patchPlayerName = (name) => async () => {
+  const { user } = store.getState();
 
-export const onLoggedPlayerNameChanged = name => {
-  AppStore.user.name.set(name);
-  patchPlayerName(name);
+  await PokerAPI.patch(`/players/${user.guid}`, { name });
+};
+
+export const onLoggedPlayerNameChanged = name => (dispatch) => {
+  dispatch({ type: USER_NAME_CHANGED, name });
 };
 
 export const onPlayerNameChanged = action(player => {
-  const gamePlayer = find(AppStore.game.players, { guid: player.guid });
+  const { game } = store.getState();
+
+  const gamePlayer = find(game.players, { guid: player.guid });
   gamePlayer.name = player.name;
 });

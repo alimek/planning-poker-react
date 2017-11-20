@@ -54,7 +54,7 @@ class NewTaskForm extends React.Component {
 }
 
 export default connect(
-  store => null,
+  null,
   dispatch => ({
     actions: bindActionCreators({ createTask }, dispatch),
   }),

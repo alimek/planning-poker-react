@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { observer } from 'mobx-react';
-
 import styles from './styles.css';
 import { TaskListItem } from '../';
 
@@ -15,7 +13,7 @@ const TaskList = ({ tasks }) => {
     return (
       <ul className={styles.list}>
         {tasks.map((task, index) => (
-          <TaskListItem key={index} task={task} number={index + 1} />
+          <TaskListItem key={task.id} task={task} number={index + 1} />
         ))}
       </ul>
     );
@@ -29,7 +27,9 @@ const TaskList = ({ tasks }) => {
 };
 
 TaskList.propTypes = {
-  tasks: PropTypes.object.isRequired,
+  tasks: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+  })).isRequired,
 };
 
-export default observer(TaskList);
+export default TaskList;

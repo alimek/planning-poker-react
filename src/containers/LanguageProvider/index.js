@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { IntlProvider } from 'react-intl';
 
-export class LanguageProvider extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class LanguageProvider extends React.Component {
   render() {
     return (
       <IntlProvider locale={this.props.locale} messages={this.props.messages[this.props.locale]}>

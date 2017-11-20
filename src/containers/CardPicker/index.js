@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import styles from './styles.css';
 import { Card } from '../../components';
-import CardModel from '../../models/Card';
+import CardModel from '../../models/card';
 import { pickCard } from '../../actions/user';
 
 const cards = [

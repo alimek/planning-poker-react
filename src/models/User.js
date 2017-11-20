@@ -19,14 +19,14 @@ class User {
   }
 
   initializeNewUser() {
-    this.guid.set(generateGUID());
-    this.name.set(`Anonymous #${getRandomNumber(0, 1000)}`);
-    saveUserToStorage(this);
+    // this.guid.set(generateGUID());
+    // this.name.set();
+    // saveUserToStorage(this);
   }
 
   restoreFromLocalStorage(userData) {
-    this.guid.set(userData.guid);
-    this.name.set(userData.name);
+    // this.guid.set(userData.guid);
+    // this.name.set(userData.name);
   }
 
   static createUserFromJoinedGameEvent(event) {
@@ -34,16 +34,16 @@ class User {
   }
 
   static createFromPlayerObj(playerObj) {
-    const user = User.createUser(playerObj);
-    user.offline.set(playerObj.offline);
-    return user;
+    // const user = User.createUser(playerObj);
+    // user.offline.set(playerObj.offline);
+    // return user;
   }
 
   static createUser(playerObj) {
-    const user = new User();
-    user.guid.set(playerObj.guid);
-    user.name.set(playerObj.name);
-    return user;
+    // const user = new User();
+    // user.guid.set(playerObj.guid);
+    // user.name.set(playerObj.name);
+    // return user;
   }
 
 }

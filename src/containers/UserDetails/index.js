@@ -1,21 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { observer } from 'mobx-react';
 import { withRouter } from 'react-router';
 
 import styles from './styles.css';
 import avatarIMG from '../../assets/img/default-avatar.jpg';
 import { Avatar, Input } from '../../components';
-import AppStore from '../../stores/AppStore';
 import { onLoggedPlayerNameChanged } from '../../actions/user';
 
 class UserDetails extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
-    router: PropTypes.object.isRequired,
+    userName: PropTypes.string.isRequired,
+    actions: PropTypes.shape({
+      onLoggedPlayerNameChanged: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   render() {
+    const { userName, actions } = this.props;
+
     return (
       <div className={styles.userDetails}>
         <div className={styles.user}>
@@ -26,8 +31,8 @@ class UserDetails extends React.Component { // eslint-disable-line react/prefer-
             inputStyle={{ textAlign: 'center' }}
             label="Your name"
             transparent
-            value={AppStore.user.name.get() || ''}
-            onChange={(e) => onLoggedPlayerNameChanged(e.target.value)}
+            value={userName}
+            onChange={e => actions.onLoggedPlayerNameChanged(e.target.value)}
           />
         </div>
       </div>
@@ -35,4 +40,11 @@ class UserDetails extends React.Component { // eslint-disable-line react/prefer-
   }
 }
 
-export default withRouter(observer(UserDetails));
+export default connect(
+  store => ({
+    userName: store.user.name,
+  }),
+  dispatch => ({
+    actions: bindActionCreators({ onLoggedPlayerNameChanged }, dispatch),
+  }),
+)(withRouter(UserDetails));

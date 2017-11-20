@@ -1,6 +1,5 @@
 import store from '../stores/store';
 import PokerAPI from '../services/PokerAPI';
-import AppStore from '../stores/AppStore';
 import Task from '../models/Task';
 
 import {
@@ -13,32 +12,37 @@ export const createTask = name => async (dispatch) => {
   const { game } = store.getState();
   try {
     const response = await PokerAPI.post(`/games/${game.id}/tasks`, { name });
-    const { data } = response;
+    const task = response.data;
 
-    dispatch({ type: TASK_CREATED, task: data });
-    return data;
-
+    dispatch({ type: TASK_CREATED, task });
+    return task;
   } catch (e) {
-    console.log(e);
+    throw new Error('Failed creating game');
   }
 };
 
 export const onTaskCreated = (message) => {
-  AppStore.game.tasks.push(Task.fromCreatedTaskEvent(message));
+  const { game } = store.getState();
+  game.tasks.push(Task.fromCreatedTaskEvent(message));
 };
 
-export const setActiveTask = (taskId) => {
-  PokerAPI.patch((`/games/${AppStore.game.id.get()}/tasks/${taskId}/active`));
+export const setActiveTask = task => async (dispatch) => {
+  const { game } = store.getState();
+
+  await PokerAPI.patch((`/games/${game.id}/tasks/${task.id}/active`));
+
+  dispatch({ type: SET_ACTIVE_TASK, task });
 };
 
 export const onActiveTaskChange = (message) => {
-  const task = AppStore.game.tasks.find((curVal) => curVal.id === message.id);
+  const { game } = store.getState();
+  const task = game.tasks.find(curVal => curVal.id === message.id);
   task.status = message.status;
 
   store.dispatch({ type: SET_ACTIVE_TASK, task });
 
-  AppStore.game.resetPlayersCards();
-  AppStore.game.setPickedCards(message.votes, task.status);
+  game.resetPlayersCards();
+  game.setPickedCards(message.votes, task.status);
   store.dispatch({ type: CLEAR_PICKED_CARD });
 };
 

@@ -1,27 +1,33 @@
 import React from 'react';
-import { observer } from 'mobx-react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import AppStore from '../../stores/AppStore';
 import styles from './styles.css';
 import CardPicker from '../CardPicker';
 import TaskDetails from '../TaskDetails';
 import Players from '../Players';
 import AdminPanel from '../AdminPanel';
 
-class GameContent extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class GameContent extends React.Component {
+  static propTypes = {
+    game: PropTypes.shape({
+      tasks: PropTypes.arrayOf(PropTypes.shape()),
+      canPickCard: PropTypes.bool,
+    }).isRequired,
+  };
+
   render() {
+    const { game } = this.props;
+
     return (
       <div className={styles.gameContent}>
         <div className={styles.gameArea}>
           {
-            AppStore.game.tasks.length === 0 ?
-              (
+            game.tasks.length === 0 ?
               <div className={styles.emptyContainer}>
                 <span className={styles.emptyText}>There is no task in game.</span>
                 <span className={styles.emptyText}>You must add first task to start the game.</span>
-              </div>
-              ) :
-              (
+              </div> :
               <section className={styles.left}>
                 <section className={styles.leftContainer}>
                   <AdminPanel />
@@ -29,13 +35,14 @@ class GameContent extends React.Component { // eslint-disable-line react/prefer-
                 </section>
                 <TaskDetails />
               </section>
-              )
           }
         </div>
-        {AppStore.game.status.get() === 'started' ? <CardPicker /> : null}
+        {game.canPickCard ? <CardPicker /> : null}
       </div>
     );
   }
 }
 
-export default observer(GameContent);
+export default connect(store => ({
+  game: store.game,
+}))(GameContent);

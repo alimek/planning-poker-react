@@ -7,7 +7,7 @@ import {
   HomeTitle,
 } from './styles';
 import { Version, PageHeader, CenterContainer } from '../../components';
-import NewGameForm from '../NewGameForm';
+import NewGameForm from '../../containers/NewGameForm';
 
 class NewGame extends React.Component {
   constructor(props) {
