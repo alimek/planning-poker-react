@@ -2,7 +2,7 @@ import { find } from 'lodash';
 import { action } from 'mobx';
 
 import store from '../stores/store';
-import PokerAPI from '../services/poker-api';
+import PokerAPI from '../utils/poker-api';
 
 import {
   SET_PICKED_CARD, USER_LOGGED_OUT, USER_NAME_CHANGED,

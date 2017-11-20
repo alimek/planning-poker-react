@@ -1,10 +1,8 @@
 import store from '../stores/store';
-import PokerAPI from '../services/poker-api';
-import Task from '../models/Task';
+import PokerAPI from '../utils/poker-api';
 
 import {
   SET_ACTIVE_TASK,
-  CLEAR_PICKED_CARD,
   TASK_CREATED,
 } from './types';
 
@@ -22,8 +20,8 @@ export const createTask = name => async (dispatch) => {
 };
 
 export const onTaskCreated = (message) => {
-  const { game } = store.getState();
-  game.tasks.push(Task.fromCreatedTaskEvent(message));
+  // const { game } = store.getState();
+  // game.tasks.push(Task.fromCreatedTaskEvent(message));
 };
 
 export const setActiveTask = task => async (dispatch) => {
@@ -35,14 +33,14 @@ export const setActiveTask = task => async (dispatch) => {
 };
 
 export const onActiveTaskChange = (message) => {
-  const { game } = store.getState();
-  const task = game.tasks.find(curVal => curVal.id === message.id);
-  task.status = message.status;
-
-  store.dispatch({ type: SET_ACTIVE_TASK, task });
-
-  game.resetPlayersCards();
-  game.setPickedCards(message.votes, task.status);
-  store.dispatch({ type: CLEAR_PICKED_CARD });
+  // const { game } = store.getState();
+  // const task = game.tasks.find(curVal => curVal.id === message.id);
+  // task.status = message.status;
+  //
+  // store.dispatch({ type: SET_ACTIVE_TASK, task });
+  //
+  // game.resetPlayersCards();
+  // game.setPickedCards(message.votes, task.status);
+  // store.dispatch({ type: CLEAR_PICKED_CARD });
 };
 
