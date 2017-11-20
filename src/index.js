@@ -13,7 +13,7 @@ import {
   NewGame,
 } from './pages';
 import { translationMessages } from './i18n';
-import store, { persistor } from './stores/store';
+import store, { persistor } from './store';
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,4 +1,4 @@
-import store from '../stores/store';
+import store from '../store';
 import PokerAPI from '../utils/poker-api';
 
 import {

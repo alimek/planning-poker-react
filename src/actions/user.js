@@ -1,7 +1,7 @@
 import { find } from 'lodash';
 import { action } from 'mobx';
 
-import store from '../stores/store';
+import store from '../store';
 import PokerAPI from '../utils/poker-api';
 
 import {
