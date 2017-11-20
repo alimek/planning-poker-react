@@ -12,7 +12,7 @@ position: absolute;
   flex-direction: row;
 `;
 
-export const Logo  = styled.div`
+export const Logo = styled.div`
   background: url(${PGSLogo});
   width: 150px;
   height: 100px;

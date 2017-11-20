@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 
@@ -6,7 +7,11 @@ import styles from './styles.css';
 import { Card } from '../../components';
 import CardModel from '../../models/card';
 
-class Players extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class Players extends React.Component {
+  static propTypes = {
+    game: PropTypes.shape({}).isRequired,
+  };
+
   render() {
     const { game } = this.props;
     const { players } = game;
@@ -15,7 +20,7 @@ class Players extends React.Component { // eslint-disable-line react/prefer-stat
       <div className={styles.players}>
         <header className={styles.header}>Players</header>
         <div className={styles.playerList}>
-          {players.map((player, index) => {
+          {players.map((player) => {
             const tmpArray = [styles.container];
             if (player.offline.get()) {
               tmpArray.push(styles.offline);
@@ -26,7 +31,7 @@ class Players extends React.Component { // eslint-disable-line react/prefer-stat
             const card = new CardModel(player.pickedCard.get());
 
             return (
-              <div key={index} className={style}>
+              <div key={player.guid} className={style}>
                 <Card
                   isSelected={player.isReady.get()}
                   card={card}

@@ -21,7 +21,7 @@ const cards = [
   new CardModel('?'),
 ];
 
-const CardPicker = ({ activeTask, pickedCard }) => { // eslint-disable-line react/prefer-stateless-function
+const CardPicker = ({ activeTask, pickedCard }) => {
   const tmpArray = [styles.cardPicker];
 
   if (activeTask && activeTask.status === 'flipped') {
@@ -32,9 +32,9 @@ const CardPicker = ({ activeTask, pickedCard }) => { // eslint-disable-line reac
     <div className={classNames(tmpArray)}>
       <span className={styles.span}>Pick your card</span>
       <div className={styles.CardsContainer}>
-        {cards.map((card, index) => (
+        {cards.map(card => (
           <Card
-            key={index}
+            key={card.value}
             card={card}
             onClick={pickCard}
             isSelected={pickedCard && pickedCard.value === card.value}
@@ -46,13 +46,16 @@ const CardPicker = ({ activeTask, pickedCard }) => { // eslint-disable-line reac
 };
 
 CardPicker.propTypes = {
-  activeTask: PropTypes.object,
-  pickedCard: PropTypes.object,
+  activeTask: PropTypes.shape(),
+  pickedCard: PropTypes.shape(),
 };
 
-export default connect(
-  store => ({
-    activeTask: store.activeTask,
-    pickedCard: store.pickedCard,
-  }),
-)(CardPicker);
+CardPicker.defaultProps = {
+  activeTask: null,
+  pickedCard: null,
+};
+
+export default connect(store => ({
+  activeTask: store.activeTask,
+  pickedCard: store.pickedCard,
+}))(CardPicker);

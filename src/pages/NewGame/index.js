@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -10,6 +11,15 @@ import { Version, PageHeader, CenterContainer } from '../../components';
 import NewGameForm from '../../containers/NewGameForm';
 
 class NewGame extends React.Component {
+  static propTypes = {
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    game: PropTypes.shape({
+      isLoaded: PropTypes.bool.isRequired,
+    }).isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -30,12 +40,10 @@ class NewGame extends React.Component {
         </CenterContainer>
         <Version />
       </NewGameContainer>
-    )
+    );
   }
 }
 
-export default connect(
-  store => ({
-    game: store.game,
-  }),
-)(withRouter(NewGame));
+export default connect(store => ({
+  game: store.game,
+}))(withRouter(NewGame));

@@ -31,7 +31,7 @@ const Card = ({
   const style = classNames(tmpArray);
 
   return (
-    <div className={style} onClick={onClickFunction}>
+    <div role="button" tabIndex={0} className={style} onClick={onClickFunction} onKeyUp={onClickFunction}>
       <span className={styles.span}>
         {!isClickable && isSelected && card.value === null ? <img className={styles.selectedLogo} src={logo} alt="Logo" /> : null}
         {card.value}
@@ -41,10 +41,15 @@ const Card = ({
 };
 
 Card.propTypes = {
-  card: PropTypes.object.isRequired,
-  onClick: PropTypes.func,
+  card: PropTypes.shape().isRequired,
+  onClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool,
   isClickable: PropTypes.bool,
+};
+
+Card.defaultProps = {
+  isSelected: false,
+  isClickable: false,
 };
 
 export default Card;

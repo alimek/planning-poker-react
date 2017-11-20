@@ -11,7 +11,7 @@ const Label = ({ name, text, small }) => {
   if (small) arrayStyles.push(styles.small);
 
   return (
-    <label
+    <label // eslint-disable-line jsx-a11y/label-has-for
       className={classNames(arrayStyles)}
       htmlFor={name}
     >

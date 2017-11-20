@@ -12,6 +12,9 @@ class NewGameForm extends React.Component { // eslint-disable-line react/prefer-
     history: PropTypes.shape({
       push: PropTypes.func,
     }).isRequired,
+    actions: PropTypes.shape({
+      createGame: PropTypes.func,
+    }).isRequired,
   };
 
   constructor(props) {
@@ -39,7 +42,7 @@ class NewGameForm extends React.Component { // eslint-disable-line react/prefer-
     this.props
       .actions
       .createGame(this.state.name)
-      .then((newGame) => this.props.history.push(`/game/${newGame.id}`));
+      .then(newGame => this.props.history.push(`/game/${newGame.id}`));
   }
 
   render() {
@@ -50,7 +53,7 @@ class NewGameForm extends React.Component { // eslint-disable-line react/prefer-
           style={{ marginBottom: '1rem' }}
           isValid={this.validateName()}
           placeholder="Enter you game name"
-          onChange={(event) => this.setState({ name: event.target.value })}
+          onChange={event => this.setState({ name: event.target.value })}
         />
         <Button
           type="button"
@@ -63,8 +66,8 @@ class NewGameForm extends React.Component { // eslint-disable-line react/prefer-
 }
 
 export default connect(
-  store => ({}),
+  null,
   dispatch => ({
     actions: bindActionCreators({ createGame }, dispatch),
-  })
+  }),
 )(withRouter(NewGameForm));

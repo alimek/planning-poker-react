@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -7,6 +8,12 @@ import { Input } from '../../components';
 import { createTask } from '../../actions/task';
 
 class NewTaskForm extends React.Component {
+  static propTypes = {
+    actions: PropTypes.shape({
+      createTask: PropTypes.func.isRequired,
+    }).isRequired,
+  };
+
   state = {
     taskName: '',
   };
@@ -42,7 +49,7 @@ class NewTaskForm extends React.Component {
           value={this.state.taskName}
           name="newTaskName"
           isValid={this.isNameValid()}
-          onChange={(event) => this.setState({ taskName: event.target.value })}
+          onChange={event => this.setState({ taskName: event.target.value })}
           placeholder="Enter task name"
           style={{ border: 0 }}
           inputStyle={styles.input}

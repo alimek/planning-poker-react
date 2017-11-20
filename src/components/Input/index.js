@@ -6,8 +6,7 @@ import classNames from 'classnames';
 import styles from './styles.css';
 import { Label } from '../../components';
 
-/* eslint-disable react/prefer-stateless-function */
-function Input({
+const Input = ({
   type,
   onChange,
   style,
@@ -19,7 +18,7 @@ function Input({
   label,
   value,
   onKeyPressed,
-}) {
+}) => {
   const realType = type || 'text';
 
   const stylesArray = [styles.input];
@@ -42,7 +41,7 @@ function Input({
       />
     </div>
   );
-}
+};
 
 Input.propTypes = {
   type: PropTypes.string,
@@ -54,15 +53,24 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   isValid: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
   transparent: PropTypes.bool,
-  value: PropTypes.string,
-  onKeyPressed: PropTypes.func,
+  value: PropTypes.string.isRequired,
+  onKeyPressed: PropTypes.func.isRequired,
   inputStyle: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.object,
     PropTypes.string,
   ]),
+};
+
+Input.defaultProps = {
+  type: 'text',
+  style: null,
+  placeholder: null,
+  isValid: true,
+  transparent: false,
+  inputStyle: null,
 };
 
 export default Input;

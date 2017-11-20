@@ -6,13 +6,11 @@ import {
   LogoText,
 } from './styles';
 
-function PageHeader() {
-  return (
-    <Header>
-      <Logo />
-      <LogoText>Planning poker - let's plan your sprint!</LogoText>
-    </Header>
-  );
-}
+const PageHeader = () => (
+  <Header>
+    <Logo />
+    <LogoText>{'Planning poker - let\'s plan your sprint!'}</LogoText>
+  </Header>
+);
 
 export default PageHeader;

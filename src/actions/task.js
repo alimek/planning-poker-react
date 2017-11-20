@@ -19,10 +19,10 @@ export const createTask = name => async (dispatch) => {
   }
 };
 
-export const onTaskCreated = (message) => {
+// export const onTaskCreated = (message) => {
   // const { game } = store.getState();
   // game.tasks.push(Task.fromCreatedTaskEvent(message));
-};
+// };
 
 export const setActiveTask = task => async (dispatch) => {
   const { game } = store.getState();
@@ -32,7 +32,7 @@ export const setActiveTask = task => async (dispatch) => {
   dispatch({ type: SET_ACTIVE_TASK, task });
 };
 
-export const onActiveTaskChange = (message) => {
+// export const onActiveTaskChange = (message) => {
   // const { game } = store.getState();
   // const task = game.tasks.find(curVal => curVal.id === message.id);
   // task.status = message.status;
@@ -42,5 +42,5 @@ export const onActiveTaskChange = (message) => {
   // game.resetPlayersCards();
   // game.setPickedCards(message.votes, task.status);
   // store.dispatch({ type: CLEAR_PICKED_CARD });
-};
+// };
 

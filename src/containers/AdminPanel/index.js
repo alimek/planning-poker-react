@@ -10,7 +10,7 @@ import { STATUS_STARTED } from '../../reducers/game';
 
 class AdminPanel extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
-    activeTask: PropTypes.object,
+    activeTask: PropTypes.shape(),
     game: PropTypes.shape({
       tasks: PropTypes.arrayOf(PropTypes.shape()),
       status: PropTypes.string,
@@ -63,6 +63,6 @@ export default connect(
     game: store.game,
   }),
   dispatch => ({
-    actions: bindActionCreators({ startGame, flip}, dispatch),
+    actions: bindActionCreators({ startGame, flip }, dispatch),
   }),
 )(AdminPanel);

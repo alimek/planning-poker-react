@@ -16,13 +16,16 @@ class LanguageProvider extends React.Component {
 
 LanguageProvider.propTypes = {
   locale: PropTypes.string,
-  messages: PropTypes.object,
+  messages: PropTypes.shape,
   children: PropTypes.element.isRequired,
 };
 
+LanguageProvider.defaultProps = {
+  locale: 'en',
+  messages: {},
+};
 
-export default connect(
-  store => ({
-    locale: store.app.locale,
-  }),
-)(LanguageProvider);
+
+export default connect(store => ({
+  locale: store.app.locale,
+}))(LanguageProvider);

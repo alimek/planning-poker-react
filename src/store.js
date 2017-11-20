@@ -5,7 +5,7 @@ import storage from 'redux-persist/es/storage';
 
 import reducers from './reducers/index';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line
 
 const config = {
   key: 'root',
