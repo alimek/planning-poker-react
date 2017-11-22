@@ -9,3 +9,5 @@ import Button from './button';
 import Card from './card';
 import Center from './centerContainer';
 import Input from './input';
+import Label from './label';
+import Loader from './loader';
