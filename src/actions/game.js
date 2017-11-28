@@ -24,13 +24,17 @@ export const createGame = name => async (dispatch) => {
 };
 
 export const getGame = id => async (dispatch) => {
-  const gameResponse = await PokerAPI.get(`/games/${id}`);
-  const game = gameResponse.data;
+  try {
+    const gameResponse = await PokerAPI.get(`/games/${id}`);
+    const game = gameResponse.data;
 
-  dispatch({ type: GAME_LOADED, game });
-  dispatch(connectToSocket());
+    dispatch({ type: GAME_LOADED, game });
+    dispatch(connectToSocket());
 
-  return game;
+    return game;
+  } catch (error) {
+    throw new Error(error);
+  }
   //
   //   if (AppStore.game.tasks.length > 0) {
   //     const task = game.tasks.find((curVal) => curVal.id === game.current_task_id);

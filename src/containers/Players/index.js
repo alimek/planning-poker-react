@@ -10,10 +10,11 @@ import CardModel from '../../models/card';
 class Players extends React.Component {
   static propTypes = {
     game: PropTypes.shape({}).isRequired,
+    user: PropTypes.shape({}).isRequired,
   };
 
   render() {
-    const { game } = this.props;
+    const { game, user } = this.props;
     const { players } = game;
 
     return (
@@ -22,22 +23,27 @@ class Players extends React.Component {
         <div className={styles.playerList}>
           {players.map((player) => {
             const tmpArray = [styles.container];
-            if (player.offline.get()) {
+
+            if (user.guid === player.guid) {
+              return null;
+            }
+
+            if (player.offline) {
               tmpArray.push(styles.offline);
             }
 
             const style = classNames(tmpArray);
 
-            const card = new CardModel(player.pickedCard.get());
+            const card = new CardModel(player.pickedCard);
 
             return (
               <div key={player.guid} className={style}>
                 <Card
-                  isSelected={player.isReady.get()}
+                  isSelected={player.isReady}
                   card={card}
                   isClickable={false}
                 />
-                <span className={styles.playerName}>{player.name.get()}</span>
+                <span className={styles.playerName}>{player.name}</span>
               </div>
             );
           })}
@@ -49,4 +55,5 @@ class Players extends React.Component {
 
 export default connect(store => ({
   game: store.game,
+  user: store.user,
 }))(Players);

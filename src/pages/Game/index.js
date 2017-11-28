@@ -14,6 +14,9 @@ class Game extends React.Component {
     game: PropTypes.shape({
       id: PropTypes.string,
     }).isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.shape().isRequired,
+    }).isRequired,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
@@ -25,13 +28,15 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
 
-    const { game, history, actions } = this.props;
-    if (!game.isLoaded) {
-      history.push('/');
-      return;
-    }
+    const {
+      actions,
+      match,
+      history,
+    } = this.props;
 
-    actions.getGame(game.id);
+    actions
+      .getGame(match.params.gameId)
+      .catch(() => history.push('/login'));
   }
 
   render() {
@@ -52,6 +57,7 @@ class Game extends React.Component {
 export default connect(
   store => ({
     game: store.game,
+    user: store.user,
   }),
   dispatch => ({
     actions: bindActionCreators({ getGame }, dispatch),

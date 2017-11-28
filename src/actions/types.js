@@ -14,3 +14,6 @@ export const TASK_FLIPPED = 'task.flipped';
 
 export const USER_LOGGED_OUT = 'user.logged_out';
 export const USER_NAME_CHANGED = 'user.name.changed';
+export const USER_SAVED = 'user.saved';
+
+export const PLAYER_JOINED_GAME = 'game.player.joined';

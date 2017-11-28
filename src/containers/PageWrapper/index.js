@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import {
   Container,
 } from './styles';
+import store from '../../store';
+import { apiSaveUser } from '../../actions/user';
 
 class PageWrapper extends React.Component {
   static propTypes = {
@@ -12,7 +15,20 @@ class PageWrapper extends React.Component {
       PropTypes.array,
       PropTypes.element,
     ]).isRequired,
+    user: PropTypes.shape({
+      isSaved: PropTypes.bool,
+    }).isRequired,
   };
+
+  constructor(props) {
+    super(props);
+
+    const { user } = this.props;
+
+    if (!user.isSaved) {
+      store.dispatch(apiSaveUser());
+    }
+  }
 
   render() {
     return (
@@ -21,4 +37,6 @@ class PageWrapper extends React.Component {
   }
 }
 
-export default PageWrapper;
+export default connect(state => ({
+  user: state.user,
+}))(PageWrapper);

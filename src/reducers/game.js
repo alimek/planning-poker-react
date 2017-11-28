@@ -1,7 +1,7 @@
 import {
   GAME_CREATED,
   GAME_LOADED,
-  GAME_STARTED,
+  GAME_STARTED, PLAYER_JOINED_GAME,
   SET_ACTIVE_TASK,
   TASK_CREATED,
   USER_LOGGED_OUT,
@@ -13,6 +13,7 @@ export const STATUS_STARTED = 'started';
 const initialState = {
   isLoaded: false,
   canPickCard: false,
+  players: [],
 };
 
 export default (state = initialState, action = {}) => {
@@ -48,6 +49,14 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         canPickCard: action.task.status !== STATUS_FLIPPED,
+      };
+    case PLAYER_JOINED_GAME:
+      return {
+        ...state,
+        players: [
+          ...state.players,
+          action.player,
+        ],
       };
     case USER_LOGGED_OUT:
       return initialState;

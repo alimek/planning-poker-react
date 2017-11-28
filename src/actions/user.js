@@ -2,7 +2,7 @@ import store from '../store';
 import PokerAPI from '../utils/poker-api';
 
 import {
-  SET_PICKED_CARD, USER_LOGGED_OUT, USER_NAME_CHANGED,
+  SET_PICKED_CARD, USER_LOGGED_OUT, USER_NAME_CHANGED, USER_SAVED,
 } from './types';
 
 const s4 = () => Math.floor((1 + Math.random()) * 0x10000)
@@ -30,20 +30,23 @@ export const pickCard = (card) => {
 //   game.getPlayerByGUID(message.player).isReady.set(true);
 // };
 
-// export const apiSaveUser = user => PokerAPI.post('/players', user.serialize());
+export const apiSaveUser = () => async (dispatch) => {
+  const { user } = store.getState();
+
+  await PokerAPI.post('/players', {
+    guid: user.guid,
+    name: user.name,
+  });
+
+  dispatch({ type: USER_SAVED });
+};
+
 //
 // export const joinGame = () => {
 //   const { game, user } = store.getState();
 //   return PokerAPI.patch(`/games/${game.id.get()}/players/${user.guid.get()}/add`);
 // };
 
-// export const onJoinedGame = (message) => {
-  // const { game } = store.getState();
-
-  // const user = User.createUserFromJoinedGameEvent(message);
-  // game.addPlayer(user);
-  // game.activatePlayer(user);
-// };
 
 export const logout = () => async (dispatch) => {
   // const { game, user } = store.getState();
