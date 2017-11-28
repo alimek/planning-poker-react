@@ -17,7 +17,6 @@ const Input = ({
   transparent,
   label,
   value,
-  onKeyPressed,
 }) => {
   const realType = type || 'text';
 
@@ -35,7 +34,6 @@ const Input = ({
         name={name}
         className={classNames(inputStyle)}
         value={value}
-        onKeyDown={onKeyPressed}
         onChange={onChange}
         placeholder={placeholder}
       />
@@ -53,10 +51,9 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   isValid: PropTypes.bool,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   transparent: PropTypes.bool,
-  value: PropTypes.string.isRequired,
-  onKeyPressed: PropTypes.func.isRequired,
+  value: PropTypes.string,
   inputStyle: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.object,
@@ -66,11 +63,13 @@ Input.propTypes = {
 
 Input.defaultProps = {
   type: 'text',
+  label: null,
   style: null,
   placeholder: null,
   isValid: true,
   transparent: false,
   inputStyle: null,
+  value: '',
 };
 
 export default Input;

@@ -5,7 +5,7 @@ import {
   Container,
 } from './styles';
 
-class PageWrapper extends React.PureComponent {
+class PageWrapper extends React.Component {
   static propTypes = {
     children: PropTypes.oneOfType([
       PropTypes.node,

@@ -20,7 +20,7 @@ class NewGameForm extends React.Component { // eslint-disable-line react/prefer-
   constructor(props) {
     super(props);
     this.state = {
-      name: null,
+      name: '',
     };
 
     this.createNewGame = this.createNewGame.bind(this);
@@ -53,6 +53,7 @@ class NewGameForm extends React.Component { // eslint-disable-line react/prefer-
           style={{ marginBottom: '1rem' }}
           isValid={this.validateName()}
           placeholder="Enter you game name"
+          value={this.state.name}
           onChange={event => this.setState({ name: event.target.value })}
         />
         <Button

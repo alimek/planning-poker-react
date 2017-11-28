@@ -7,26 +7,23 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App, LanguageProvider, PageWrapper } from './containers';
+import { PageWrapper, App } from './containers';
 import {
   Game,
   NewGame,
 } from './pages';
-import { translationMessages } from './i18n';
 import store, { persistor } from './store';
 
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <LanguageProvider messages={translationMessages} >
-        <BrowserRouter>
-          <PageWrapper>
-            <Route exact path="/" component={App} />
-            <Route path="/login" component={NewGame} />
-            <Route path="/game/:gameId" component={Game} />
-          </PageWrapper>
-        </BrowserRouter>
-      </LanguageProvider>
+      <BrowserRouter>
+        <PageWrapper>
+          <Route exact path="/" component={App} />
+          <Route path="/login" component={NewGame} />
+          <Route path="/game/:gameId" component={Game} />
+        </PageWrapper>
+      </BrowserRouter>
     </PersistGate>
   </Provider>,
   document.getElementById('app'),
