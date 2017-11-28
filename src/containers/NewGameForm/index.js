@@ -54,6 +54,7 @@ class NewGameForm extends React.Component { // eslint-disable-line react/prefer-
           isValid={this.validateName()}
           placeholder="Enter you game name"
           value={this.state.name}
+          onKeyPressed={event => event.keyCode === 13 && this.createNewGame()}
           onChange={event => this.setState({ name: event.target.value })}
         />
         <Button
