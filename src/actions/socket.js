@@ -1,5 +1,14 @@
-import io from 'socket.io-client/dist/socket.io';
 
-import config from '../config';
+import socket from '../utils/socket';
+import store from '../store';
 
-export const createServer = () => io(config.socketURL, { transports: ['polling'] });
+export const connectToSocket = () => () => socket.connect();
+
+export const loginToGame = () => () => {
+  const { game, user } = store.getState();
+
+  socket.emit('join', {
+    gameID: game.id,
+    user,
+  });
+};

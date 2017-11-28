@@ -13,6 +13,7 @@ import {
 } from './types';
 import { setActiveTask } from './task';
 import { getNextTask } from '../utils/task';
+import { connectToSocket } from './socket';
 
 export const createGame = name => async (dispatch) => {
   const newGame = await PokerAPI.post('/games', { name });
@@ -26,10 +27,8 @@ export const getGame = id => async (dispatch) => {
   const gameResponse = await PokerAPI.get(`/games/${id}`);
   const game = gameResponse.data;
 
-  // AppStore.game.fromResponse(game);
-  // AppStore.io = createServer();
-
   dispatch({ type: GAME_LOADED, game });
+  dispatch(connectToSocket());
 
   return game;
   //
