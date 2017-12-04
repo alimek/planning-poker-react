@@ -1,0 +1,8 @@
+###############################################################################
+# Set default behavior to automatically normalize line endings.
+###############################################################################
+# Fixes all line endings for Windows, requires Git 2.10 or later
+* text=auto eol=lf
+
+# Fixes all line endings for Windows to enable project to build on systems running older Git
+*.js eol=lf

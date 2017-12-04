@@ -7,7 +7,6 @@ import { loginToGame, onJoinedGame } from '../actions/socket';
 const socket = io(config.socketURL, {
   autoConnect: false,
   transports: [
-    'websocket',
     'polling',
   ],
 });
